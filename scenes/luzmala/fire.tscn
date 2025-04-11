@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://bc1qwofowim75"]
+
+[ext_resource type="Shader" uid="uid://cwm1avgeba6rq" path="res://shaders/fire/fire.gdshader" id="1_mtrdi"]
+[ext_resource type="Texture2D" uid="uid://cb8rcs7eyys20" path="res://shaders/fire/WispyNoise.png" id="2_lcv0o"]
+[ext_resource type="Texture2D" uid="uid://bbhvutsqwh74q" path="res://shaders/fire/FireMask.png" id="3_eoiyy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cs3c5"]
+render_priority = 0
+shader = ExtResource("1_mtrdi")
+shader_parameter/noise_texture = ExtResource("2_lcv0o")
+shader_parameter/texture_mask = ExtResource("3_eoiyy")
+shader_parameter/emission_intensity = 2.0
+shader_parameter/time_scale = 1.0
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/edge_softness = 0.1
+
+[sub_resource type="Gradient" id="Gradient_xdssn"]
+offsets = PackedFloat32Array(0, 0.568465, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.150319, 0.235724, 0.519711, 0.964706, 0.054902, 0.101961, 0.254902, 0.741176)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c04ax"]
+gradient = SubResource("Gradient_xdssn")
+width = 128
+
+[sub_resource type="Curve" id="Curve_87y0n"]
+_data = [Vector2(0, 0), 0.0, 4.75672, 0, 0, Vector2(0.495215, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0r8b6"]
+width = 128
+curve = SubResource("Curve_87y0n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xg35s"]
+lifetime_randomness = 0.81
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.5
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 2.0
+linear_accel_max = 3.0
+scale_min = 0.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_0r8b6")
+color_ramp = SubResource("GradientTexture1D_c04ax")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qpl1j"]
+size = Vector2(0.5, 0.5)
+
+[node name="fire" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_cs3c5")
+cast_shadow = 0
+amount = 128
+lifetime = 0.5
+randomness = 0.74
+fixed_fps = 24
+visibility_aabb = AABB(-0.75, -0.3, -0.75, 1.5, 3, 1.5)
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_xg35s")
+draw_pass_1 = SubResource("QuadMesh_qpl1j")
+metadata/_edit_lock_ = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00989723, 0)
+light_color = Color(0.560784, 0.752941, 1, 1)
+light_energy = 2.0
+light_bake_mode = 0
+metadata/_edit_lock_ = true

@@ -1,0 +1,145 @@
+[gd_scene load_steps=26 format=3 uid="uid://b78fqcqmlf850"]
+
+[ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
+[ext_resource type="Script" uid="uid://bxqy10c456vum" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_6iypd"]
+[ext_resource type="Texture2D" uid="uid://hnenrcra7oso" path="res://models/arrayan_0.png" id="2_wlxy5"]
+[ext_resource type="Script" uid="uid://dg7v6ju7f8bjo" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="3_tereu"]
+[ext_resource type="Script" uid="uid://bq15kb8qk5edp" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="4_cdqbm"]
+[ext_resource type="Script" uid="uid://c8855cuhoq1dh" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="5_imku0"]
+[ext_resource type="Script" uid="uid://cc51w7q8nipfb" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="6_wlxy5"]
+[ext_resource type="Script" uid="uid://bukqkiw4jmfv3" path="res://addons/proton_scatter/src/scatter_item.gd" id="7_3v7ru"]
+[ext_resource type="Script" uid="uid://csws0p4mgth7w" path="res://addons/proton_scatter/src/modifiers/clusterize.gd" id="8_imku0"]
+[ext_resource type="Script" uid="uid://dtogghid4plak" path="res://addons/proton_scatter/src/scatter_shape.gd" id="8_tcnuu"]
+[ext_resource type="Script" uid="uid://c002frylejmtn" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="9_tuemg"]
+[ext_resource type="PackedScene" uid="uid://cwiu8nsyij4gn" path="res://scenes/player/player.tscn" id="10_6iypd"]
+[ext_resource type="PackedScene" uid="uid://bc1qwofowim75" path="res://scenes/luzmala/fire.tscn" id="11_tereu"]
+[ext_resource type="Script" uid="uid://wuthkdqhh4yu" path="res://scenes/luzmala/fire.gd" id="12_cdqbm"]
+[ext_resource type="VoxelGIData" uid="uid://c8qriy6awil6f" path="res://scenes/level/level.VoxelGI_data.res" id="15_3v7ru"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tereu"]
+albedo_color = Color(0.863349, 0.753784, 0.753887, 1)
+albedo_texture = ExtResource("2_wlxy5")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
+material = SubResource("StandardMaterial3D_tereu")
+size = Vector2(1000, 1000)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6iypd"]
+points = PackedVector3Array(-500, 0, -500, -500, 0, 500, 500, 0, -500, 500, 0, 500)
+
+[sub_resource type="Resource" id="Resource_vrc4q"]
+script = ExtResource("4_cdqbm")
+spacing = Vector3(1, 1, 1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_x4oov"]
+script = ExtResource("5_imku0")
+position = Vector3(0, 0, 0)
+rotation = Vector3(20, 360, 20)
+scale = Vector3(1, 1.2, 1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_ivku7"]
+script = ExtResource("6_wlxy5")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 10.0
+ray_offset = 10.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 90.0
+collision_mask = 1
+exclude_mask = 0
+enabled = false
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_ss4b2"]
+script = ExtResource("8_imku0")
+mask = "res://shaders/fire/HoleNoise.png"
+mask_rotation = 0.0
+mask_offset = Vector2(0, 0)
+mask_scale = Vector2(1, 1)
+pixel_to_unit_ratio = 32.0
+remove_below = 0.5
+remove_above = 1.0
+scale_transforms = true
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_qjqsm"]
+script = ExtResource("2_6iypd")
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_vrc4q"), SubResource("Resource_x4oov"), SubResource("Resource_ivku7"), SubResource("Resource_ss4b2")])
+
+[sub_resource type="Resource" id="Resource_s0gvp"]
+script = ExtResource("9_tuemg")
+size = Vector3(100, 1, 50)
+metadata/_custom_type_script = "uid://c002frylejmtn"
+
+[sub_resource type="Environment" id="Environment_6iypd"]
+fog_light_color = Color(0.576123, 0.524408, 0.639224, 1)
+fog_sun_scatter = 0.49
+fog_height = 0.5
+fog_height_density = 0.5
+volumetric_fog_ambient_inject = 0.21
+
+[node name="Node3D" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("10_6iypd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.5885, 3.3405, 2.61503)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_noarx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_6iypd")
+
+[node name="ProtonScatter" type="Node3D" parent="."]
+script = ExtResource("1_4arys")
+modifier_stack = SubResource("Resource_qjqsm")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="Grass" type="Node3D" parent="ProtonScatter"]
+script = ExtResource("7_3v7ru")
+path = "uid://caqxfqurbp3ku"
+
+[node name="ScatterShape" type="Node3D" parent="ProtonScatter"]
+script = ExtResource("8_tcnuu")
+shape = SubResource("Resource_s0gvp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.797106, -0.496793, 0.343246, -0.0667247, 0.492492, 0.867755, -0.600141, -0.714596, 0.35942, 0, 39.8535, 0)
+light_color = Color(0.725271, 0.927603, 0.945015, 1)
+light_energy = 0.1
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6iypd")
+
+[node name="fire" parent="." instance=ExtResource("11_tereu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.6903, 0.6, 7.521)
+script = ExtResource("12_cdqbm")
+
+[node name="VoxelGI" type="VoxelGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53131, 4.43506, 0.873535)
+visible = false
+size = Vector3(112.001, 11.1299, 61.1846)
+data = ExtResource("15_3v7ru")
