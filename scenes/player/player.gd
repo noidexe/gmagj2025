@@ -100,7 +100,7 @@ func _physics_process(delta):
 		velocity.y += jump_velocity
 
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var direction = input_dir.normalized().rotated(-head.rotation.y)
+	var direction = input_dir.normalized().rotated(-head.global_rotation.y)
 	direction = Vector3(direction.x, 0, direction.y)
 	if is_on_floor(): #don't lerp y movement
 		velocity.x = lerp(velocity.x, direction.x * speed * time_scale, accel * delta)

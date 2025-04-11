@@ -156,6 +156,7 @@ mouse_filter = 2
 texture = ExtResource("2_nq3sk")
 
 [node name="vignette" type="TextureRect" parent="HUD/Control"]
+self_modulate = Color(1, 1, 1, 0.498039)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,8 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://b78fqcqmlf850"]
+[gd_scene load_steps=31 format=3 uid="uid://b78fqcqmlf850"]
 
 [ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://bxqy10c456vum" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_6iypd"]
-[ext_resource type="Texture2D" uid="uid://hnenrcra7oso" path="res://models/arrayan_0.png" id="2_wlxy5"]
+[ext_resource type="Texture2D" uid="uid://c8xom1fkdkito" path="res://textures/Texturelabs_Soil_135M.jpg" id="2_pm6rs"]
 [ext_resource type="Script" uid="uid://dg7v6ju7f8bjo" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="3_tereu"]
 [ext_resource type="Script" uid="uid://bq15kb8qk5edp" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="4_cdqbm"]
 [ext_resource type="Script" uid="uid://c8855cuhoq1dh" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="5_imku0"]
@@ -14,25 +14,129 @@
 [ext_resource type="PackedScene" uid="uid://cwiu8nsyij4gn" path="res://scenes/player/player.tscn" id="10_6iypd"]
 [ext_resource type="PackedScene" uid="uid://bc1qwofowim75" path="res://scenes/luzmala/fire.tscn" id="11_tereu"]
 [ext_resource type="Script" uid="uid://wuthkdqhh4yu" path="res://scenes/luzmala/fire.gd" id="12_cdqbm"]
-[ext_resource type="VoxelGIData" uid="uid://c8qriy6awil6f" path="res://scenes/level/level.VoxelGI_data.res" id="15_3v7ru"]
+[ext_resource type="PackedScene" uid="uid://8ay5rlrutcmx" path="res://addons/proton_scatter/demos/assets/large_rock.tscn" id="15_vrc4q"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tereu"]
-albedo_color = Color(0.863349, 0.753784, 0.753887, 1)
-albedo_texture = ExtResource("2_wlxy5")
-albedo_texture_force_srgb = true
-uv1_scale = Vector3(2, 2, 2)
-uv1_triplanar = true
+[sub_resource type="Shader" id="Shader_vrc4q"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+varying vec3 uv1_triplanar_pos;
+
+uniform float uv1_blend_sharpness : hint_range(0.0, 150.0, 0.001);
+varying vec3 uv1_power_normal;
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+uniform sampler2D texture_height : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform float height_ratio : hint_range(0.0, 1.0);
+
+void vertex() {
+	vec3 normal = NORMAL;
+
+	TANGENT = vec3(0.0, 0.0, -1.0) * abs(normal.x);
+	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.y);
+	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.z);
+	TANGENT = normalize(TANGENT);
+
+	BINORMAL = vec3(0.0, 1.0, 0.0) * abs(normal.x);
+	BINORMAL += vec3(0.0, 0.0, -1.0) * abs(normal.y);
+	BINORMAL += vec3(0.0, 1.0, 0.0) * abs(normal.z);
+	BINORMAL = normalize(BINORMAL);
+
+	// UV1 Triplanar: Enabled
+	uv1_power_normal = pow(abs(NORMAL), vec3(uv1_blend_sharpness));
+	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
+	uv1_power_normal /= dot(uv1_power_normal, vec3(1.0));
+	uv1_triplanar_pos *= vec3(1.0, -1.0, 1.0);
+	
+	VERTEX.y += -0.5 + 2.0 * texture(texture_height, UV).r * height_ratio; 
+}
+
+vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {
+	vec4 samp = vec4(0.0);
+	samp += texture(p_sampler, p_triplanar_pos.xy) * p_weights.z;
+	samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
+	samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
+	return samp;
+}
+
+void fragment() {
+	vec4 albedo_tex = triplanar_texture(texture_albedo, uv1_power_normal, uv1_triplanar_pos);
+
+	// Albedo Texture Force sRGB: Enabled
+	albedo_tex.rgb = mix(
+			pow((albedo_tex.rgb + vec3(0.055)) * (1.0 / (1.0 + 0.055)), vec3(2.4)),
+			albedo_tex.rgb.rgb * (1.0 / 12.92),
+			lessThan(albedo_tex.rgb, vec3(0.04045)));
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(triplanar_texture(texture_metallic, uv1_power_normal, uv1_triplanar_pos), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(triplanar_texture(texture_roughness, uv1_power_normal, uv1_triplanar_pos), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vrc4q"]
+noise_type = 5
+frequency = 0.5135
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x4oov"]
+width = 400
+height = 200
+noise = SubResource("FastNoiseLite_vrc4q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x4oov"]
+render_priority = 0
+shader = SubResource("Shader_vrc4q")
+shader_parameter/albedo = Color(0.863349, 0.753784, 0.753887, 1)
+shader_parameter/texture_albedo = ExtResource("2_pm6rs")
+shader_parameter/albedo_texture_size = Vector2i(1920, 1281)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_height = SubResource("NoiseTexture2D_x4oov")
+shader_parameter/height_ratio = 0.4
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
-material = SubResource("StandardMaterial3D_tereu")
-size = Vector2(1000, 1000)
+material = SubResource("ShaderMaterial_x4oov")
+size = Vector2(100, 50)
+subdivide_width = 400
+subdivide_depth = 200
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6iypd"]
 points = PackedVector3Array(-500, 0, -500, -500, 0, 500, 500, 0, -500, 500, 0, 500)
 
 [sub_resource type="Resource" id="Resource_vrc4q"]
 script = ExtResource("4_cdqbm")
-spacing = Vector3(1, 1, 1)
+spacing = Vector3(0.8, 0.8, 1)
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -60,7 +164,7 @@ align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
 exclude_mask = 0
-enabled = false
+enabled = true
 override_global_seed = false
 custom_seed = 0
 restrict_height = false
@@ -91,17 +195,41 @@ script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 metadata/_custom_type_script = "uid://c002frylejmtn"
 
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_vrc4q"]
+
+[sub_resource type="Sky" id="Sky_x4oov"]
+sky_material = SubResource("PhysicalSkyMaterial_vrc4q")
+
 [sub_resource type="Environment" id="Environment_6iypd"]
-fog_light_color = Color(0.576123, 0.524408, 0.639224, 1)
-fog_sun_scatter = 0.49
+background_mode = 2
+sky = SubResource("Sky_x4oov")
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_y_scale = 0
+sdfgi_energy = 3.0
+glow_enabled = true
+glow_normalized = true
+glow_strength = 1.25
+glow_bloom = 0.08
+glow_blend_mode = 1
+fog_enabled = true
+fog_light_color = Color(0.347656, 0.3193, 0.327192, 1)
+fog_sun_scatter = 0.38
+fog_density = 0.06
+fog_aerial_perspective = 0.955
+fog_sky_affect = 0.371
 fog_height = 0.5
-fog_height_density = 0.5
-volumetric_fog_ambient_inject = 0.21
+fog_height_density = 0.25
+volumetric_fog_enabled = true
+volumetric_fog_ambient_inject = 0.02
+volumetric_fog_sky_affect = 0.18
+adjustment_enabled = true
 
 [node name="Node3D" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("10_6iypd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.5885, 3.3405, 2.61503)
+transform = Transform3D(-0.158434, 0, -0.98737, 0, 1, 0, 0.98737, 0, -0.158434, -44.3307, 3.3405, 2.61503)
+base_speed = 8.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_noarx")
@@ -117,9 +245,22 @@ modifier_stack = SubResource("Resource_qjqsm")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
-[node name="Grass" type="Node3D" parent="ProtonScatter"]
+[node name="Trees" type="Node3D" parent="ProtonScatter"]
 script = ExtResource("7_3v7ru")
+visibility_range_end = 30.0
 path = "uid://caqxfqurbp3ku"
+
+[node name="Rocks" type="Node3D" parent="ProtonScatter"]
+script = ExtResource("7_3v7ru")
+proportion = 30
+visibility_range_end = 30.0
+path = "uid://bltmr2xgs8nq1"
+
+[node name="Bushes" type="Node3D" parent="ProtonScatter"]
+script = ExtResource("7_3v7ru")
+proportion = 50
+visibility_range_end = 30.0
+path = "uid://b8abs8me7ckgo"
 
 [node name="ScatterShape" type="Node3D" parent="ProtonScatter"]
 script = ExtResource("8_tcnuu")
@@ -128,7 +269,7 @@ shape = SubResource("Resource_s0gvp")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.797106, -0.496793, 0.343246, -0.0667247, 0.492492, 0.867755, -0.600141, -0.714596, 0.35942, 0, 39.8535, 0)
 light_color = Color(0.725271, 0.927603, 0.945015, 1)
-light_energy = 0.1
+light_energy = 0.5
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -138,8 +279,26 @@ environment = SubResource("Environment_6iypd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.6903, 0.6, 7.521)
 script = ExtResource("12_cdqbm")
 
-[node name="VoxelGI" type="VoxelGI" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53131, 4.43506, 0.873535)
-visible = false
-size = Vector3(112.001, 11.1299, 61.1846)
-data = ExtResource("15_3v7ru")
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.636536, 0, -0.771247, 0, 1, 0, 0.771247, 0, 0.636536, -45.277, 0.981065, 8.90952)
+
+[node name="large_rock" parent="." instance=ExtResource("15_vrc4q")]
+transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, -51.1502, 0, 0)
+
+[node name="large_rock2" parent="." instance=ExtResource("15_vrc4q")]
+transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, -51.1502, 0, -5.26554)
+
+[node name="large_rock3" parent="." instance=ExtResource("15_vrc4q")]
+transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, -51.1502, 0, -11.5151)
+
+[node name="large_rock4" parent="." instance=ExtResource("15_vrc4q")]
+transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, -51.1502, 0, -19.1639)
+
+[node name="large_rock5" parent="." instance=ExtResource("15_vrc4q")]
+transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, -51.1502, 0, 6.0558)
+
+[node name="large_rock6" parent="." instance=ExtResource("15_vrc4q")]
+transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, -51.1502, 0, 11.8321)
+
+[node name="large_rock7" parent="." instance=ExtResource("15_vrc4q")]
+transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, -51.1502, 0, 17.3252)
