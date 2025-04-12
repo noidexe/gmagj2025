@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b78fqcqmlf850"]
+[gd_scene load_steps=45 format=3 uid="uid://b78fqcqmlf850"]
 
 [ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://bxqy10c456vum" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_6iypd"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cwiu8nsyij4gn" path="res://scenes/player/player.tscn" id="10_6iypd"]
 [ext_resource type="PackedScene" uid="uid://bc1qwofowim75" path="res://scenes/luzmala/fire.tscn" id="11_tereu"]
 [ext_resource type="Script" uid="uid://wuthkdqhh4yu" path="res://scenes/luzmala/fire.gd" id="12_cdqbm"]
+[ext_resource type="Texture2D" uid="uid://bv2bnvyva5eyw" path="res://textures/panorama_image.png" id="13_xm880"]
 [ext_resource type="PackedScene" uid="uid://8ay5rlrutcmx" path="res://addons/proton_scatter/demos/assets/large_rock.tscn" id="15_vrc4q"]
 [ext_resource type="AudioStream" uid="uid://dh8fs45jrtopk" path="res://sound/751465__borgory__crickets-chirping-in-the-night-at-the-forest-001.wav" id="16_x4oov"]
 [ext_resource type="PackedScene" uid="uid://vtpypmtmc2o7" path="res://models/la_pelota_de_voley.glb" id="17_ivku7"]
@@ -147,7 +148,7 @@ subdivide_depth = 400
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrc4q"]
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_xm880"]
+[sub_resource type="Resource" id="Resource_fhw5o"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -156,7 +157,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_vfold"]
+[sub_resource type="Resource" id="Resource_xm880"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -167,7 +168,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_r732y"]
+[sub_resource type="Resource" id="Resource_vfold"]
 script = ExtResource("6_wlxy5")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 10.0
@@ -183,7 +184,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_87pmf"]
+[sub_resource type="Resource" id="Resource_r732y"]
 script = ExtResource("8_imku0")
 mask = "res://shaders/fire/HoleNoise.png"
 mask_rotation = 0.0
@@ -199,33 +200,35 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_mf35j"]
+[sub_resource type="Resource" id="Resource_87pmf"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_xm880"), SubResource("Resource_vfold"), SubResource("Resource_r732y"), SubResource("Resource_87pmf")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_fhw5o"), SubResource("Resource_xm880"), SubResource("Resource_vfold"), SubResource("Resource_r732y")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 metadata/_custom_type_script = "uid://c002frylejmtn"
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_vrc4q"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vfold"]
+panorama = ExtResource("13_xm880")
+energy_multiplier = 0.1
 
-[sub_resource type="Sky" id="Sky_x4oov"]
-sky_material = SubResource("PhysicalSkyMaterial_vrc4q")
+[sub_resource type="Sky" id="Sky_t51ir"]
+sky_material = SubResource("PanoramaSkyMaterial_vfold")
 
 [sub_resource type="Environment" id="Environment_6iypd"]
 background_mode = 2
-sky = SubResource("Sky_x4oov")
+sky = SubResource("Sky_t51ir")
+tonemap_mode = 2
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
+sdfgi_cascades = 3
 sdfgi_y_scale = 0
-sdfgi_energy = 3.0
 glow_enabled = true
 glow_normalized = true
 glow_strength = 1.25
-glow_bloom = 0.08
+glow_bloom = 0.1
 glow_blend_mode = 1
-fog_enabled = true
 fog_light_color = Color(0.347656, 0.3193, 0.327192, 1)
 fog_sun_scatter = 0.38
 fog_density = 0.06
@@ -233,10 +236,8 @@ fog_aerial_perspective = 0.955
 fog_sky_affect = 0.371
 fog_height = 0.5
 fog_height_density = 0.25
-volumetric_fog_enabled = true
 volumetric_fog_ambient_inject = 0.02
 volumetric_fog_sky_affect = 0.18
-adjustment_enabled = true
 
 [node name="Level" type="Node3D"]
 
@@ -257,7 +258,7 @@ shape = SubResource("BoxShape3D_vrc4q")
 [node name="ProtonScatter" type="Node3D" parent="."]
 script = ExtResource("1_4arys")
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_mf35j")
+modifier_stack = SubResource("Resource_87pmf")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -283,10 +284,16 @@ script = ExtResource("8_tcnuu")
 shape = SubResource("Resource_s0gvp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.797106, -0.496793, 0.343246, -0.0667247, 0.492492, 0.867755, -0.600141, -0.714596, 0.35942, 0, 39.8535, 0)
-light_color = Color(0.725271, 0.927603, 0.945015, 1)
-light_energy = 0.5
+transform = Transform3D(1, 0, 0, 0, 0.121904, 0.992542, 0, -0.992542, 0.121904, -3.60171, 38.2331, 2.43836)
+light_color = Color(0.819608, 0.929412, 1, 1)
+light_energy = 0.1
+light_volumetric_fog_energy = 2.8
+light_bake_mode = 1
 shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.9
+directional_shadow_max_distance = 30.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6iypd")
@@ -358,4 +365,4 @@ transform = Transform3D(0.001, 0, 0, 0, 0.000214855, -0.000976646, 0, 0.00097664
 mesh = ExtResource("27_fhw5o")
 
 [node name="Sketchfab_Scene10" parent="." instance=ExtResource("28_fhw5o")]
-transform = Transform3D(-0.865982, 0, -0.500076, 0, 1, 0, 0.500076, 0, -0.865982, -43.6902, -0.117063, 7.57632)
+transform = Transform3D(-0.865982, 0, -0.500076, 0, 1, 0, 0.500076, 0, -0.865982, -43.4718, -0.117063, 7.45023)

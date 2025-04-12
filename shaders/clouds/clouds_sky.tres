@@ -1,0 +1,37 @@
+[gd_resource type="Sky" load_steps=9 format=3 uid="uid://b6ffjku47471j"]
+
+[ext_resource type="Script" uid="uid://bb8cjsc1qnnht" path="res://shaders/clouds/cloud_sky.gd" id="1_ck7j2"]
+[ext_resource type="Shader" uid="uid://dqjibtwrom6ip" path="res://shaders/clouds/clouds.gdshader" id="2_36l73"]
+[ext_resource type="Texture2D" uid="uid://262btfwc1fwn" path="res://shaders/clouds/transmittance_lut.tres" id="4_dk4sc"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_3piu1"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_ahe4b"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_ni5hg"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_5l0vi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iidrq"]
+shader = ExtResource("2_36l73")
+shader_parameter/blend_from_texture = SubResource("Texture2DRD_3piu1")
+shader_parameter/blend_to_texture = SubResource("Texture2DRD_ahe4b")
+shader_parameter/sky_blend_from_texture = SubResource("Texture2DRD_ni5hg")
+shader_parameter/sky_blend_to_texture = SubResource("Texture2DRD_5l0vi")
+shader_parameter/source_transmittance = ExtResource("4_dk4sc")
+shader_parameter/blend_amount = 0.1875
+shader_parameter/sun_disk_scale = 2.0
+
+[resource]
+sky_material = SubResource("ShaderMaterial_iidrq")
+process_mode = 2
+radiance_size = 1
+script = ExtResource("1_ck7j2")
+wind_direction = Vector2(1, 0)
+wind_speed = 1.0
+density = 0.05
+cloud_coverage = 0.12
+time_offset = 0.0
+sun_disk_scale = 2.0
+ground_color = Color(0.222656, 0.156219, 0.0322145, 1)
+texture_size = 768

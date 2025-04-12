@@ -9,10 +9,10 @@ render_priority = 0
 shader = ExtResource("1_mtrdi")
 shader_parameter/noise_texture = ExtResource("2_lcv0o")
 shader_parameter/texture_mask = ExtResource("3_eoiyy")
-shader_parameter/emission_intensity = 2.0
+shader_parameter/emission_intensity = 3.0
 shader_parameter/time_scale = 1.0
-shader_parameter/texture_scale = Vector2(1, 1)
-shader_parameter/edge_softness = 0.1
+shader_parameter/texture_scale = Vector2(0.75, 0.75)
+shader_parameter/edge_softness = 0.3
 
 [sub_resource type="Gradient" id="Gradient_xdssn"]
 offsets = PackedFloat32Array(0, 0.568465, 1)
@@ -23,7 +23,7 @@ gradient = SubResource("Gradient_xdssn")
 width = 128
 
 [sub_resource type="Curve" id="Curve_87y0n"]
-_data = [Vector2(0, 0), 0.0, 4.75672, 0, 0, Vector2(0.495215, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 4.75672, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_0r8b6"]
@@ -53,7 +53,8 @@ size = Vector2(0.5, 0.5)
 material_override = SubResource("ShaderMaterial_cs3c5")
 cast_shadow = 0
 amount = 128
-lifetime = 0.5
+lifetime = 0.6
+speed_scale = 0.5
 randomness = 0.74
 fixed_fps = 24
 visibility_aabb = AABB(-0.75, -0.3, -0.75, 1.5, 3, 1.5)

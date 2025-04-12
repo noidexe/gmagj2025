@@ -93,8 +93,3 @@ reset_to_safe_position={
 "deadzone": 0.2,
 "events": []
 }
-
-[rendering]
-
-scaling_3d/mode=2
-scaling_3d/scale=0.7
