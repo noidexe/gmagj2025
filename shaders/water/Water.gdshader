@@ -16,7 +16,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 shader_type 	spatial;
 render_mode 	cull_back,diffuse_burley,specular_schlick_ggx, blend_mix;
 
-global uniform bool game_paused;
+const bool game_paused = false;
 
 uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
