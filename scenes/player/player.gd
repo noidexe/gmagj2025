@@ -196,8 +196,8 @@ func camera_shake(duration: float = 1.0, intensity: float = 0.05):
 
 func freeze():
 	var tween := create_tween()
-	tween.tween_property(self, ^"time_scale", 0.1, 1)
-	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(self, ^"time_scale", 0.01, 1.5)
+	tween.set_ease(Tween.EASE_IN_OUT)
 	
 func unfreeze():
 	var tween := create_tween()
