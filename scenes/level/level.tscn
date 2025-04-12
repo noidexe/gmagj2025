@@ -211,7 +211,7 @@ metadata/_custom_type_script = "uid://c002frylejmtn"
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vfold"]
 panorama = ExtResource("13_xm880")
-energy_multiplier = 0.1
+energy_multiplier = 0.3
 
 [sub_resource type="Sky" id="Sky_t51ir"]
 sky_material = SubResource("PanoramaSkyMaterial_vfold")
@@ -224,20 +224,23 @@ sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_cascades = 3
 sdfgi_y_scale = 0
+sdfgi_energy = 3.0
 glow_enabled = true
 glow_normalized = true
 glow_strength = 1.25
 glow_bloom = 0.1
 glow_blend_mode = 1
-fog_light_color = Color(0.347656, 0.3193, 0.327192, 1)
+fog_enabled = true
+fog_light_color = Color(0.273611, 0.147532, 0.347656, 1)
 fog_sun_scatter = 0.38
 fog_density = 0.06
 fog_aerial_perspective = 0.955
 fog_sky_affect = 0.371
-fog_height = 0.5
-fog_height_density = 0.25
-volumetric_fog_ambient_inject = 0.02
-volumetric_fog_sky_affect = 0.18
+fog_height = 1.0
+fog_height_density = 1.0
+volumetric_fog_enabled = true
+volumetric_fog_ambient_inject = 16.0
+volumetric_fog_sky_affect = 0.096
 
 [node name="Level" type="Node3D"]
 
@@ -284,7 +287,7 @@ script = ExtResource("8_tcnuu")
 shape = SubResource("Resource_s0gvp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.121904, 0.992542, 0, -0.992542, 0.121904, -3.60171, 38.2331, 2.43836)
+transform = Transform3D(0.863285, 0.243078, -0.442326, 0.498094, -0.268799, 0.824409, 0.0814991, -0.932019, -0.353126, -3.60171, 38.2331, 2.43836)
 light_color = Color(0.819608, 0.929412, 1, 1)
 light_energy = 0.1
 light_volumetric_fog_energy = 2.8
