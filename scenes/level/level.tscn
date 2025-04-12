@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b78fqcqmlf850"]
+[gd_scene load_steps=36 format=3 uid="uid://b78fqcqmlf850"]
 
 [ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://bxqy10c456vum" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_6iypd"]
@@ -15,6 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://bc1qwofowim75" path="res://scenes/luzmala/fire.tscn" id="11_tereu"]
 [ext_resource type="Script" uid="uid://wuthkdqhh4yu" path="res://scenes/luzmala/fire.gd" id="12_cdqbm"]
 [ext_resource type="PackedScene" uid="uid://8ay5rlrutcmx" path="res://addons/proton_scatter/demos/assets/large_rock.tscn" id="15_vrc4q"]
+[ext_resource type="AudioStream" uid="uid://dh8fs45jrtopk" path="res://sound/751465__borgory__crickets-chirping-in-the-night-at-the-forest-001.wav" id="16_x4oov"]
+[ext_resource type="PackedScene" uid="uid://vtpypmtmc2o7" path="res://models/la_pelota_de_voley.glb" id="17_ivku7"]
+[ext_resource type="PackedScene" uid="uid://chq4j3c4v2783" path="res://models/light_blue_eastpak-like_backpack.glb" id="18_ss4b2"]
+[ext_resource type="PackedScene" uid="uid://cj2lkdgtpshke" path="res://models/godot_plush_sitted.glb" id="19_qjqsm"]
+[ext_resource type="PackedScene" uid="uid://dk1yjpqq8bxmx" path="res://models/tent.glb" id="21_wyi7n"]
 
 [sub_resource type="Shader" id="Shader_vrc4q"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's StandardMaterial3D.
@@ -99,11 +104,11 @@ void fragment() {
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vrc4q"]
 noise_type = 5
-frequency = 0.5135
+frequency = 0.1356
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x4oov"]
-width = 400
-height = 200
+width = 800
+height = 400
 noise = SubResource("FastNoiseLite_vrc4q")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x4oov"]
@@ -123,18 +128,18 @@ shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/texture_height = SubResource("NoiseTexture2D_x4oov")
-shader_parameter/height_ratio = 0.4
+shader_parameter/height_ratio = 0.2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
 material = SubResource("ShaderMaterial_x4oov")
 size = Vector2(100, 50)
-subdivide_width = 400
-subdivide_depth = 200
+subdivide_width = 800
+subdivide_depth = 400
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6iypd"]
-points = PackedVector3Array(-500, 0, -500, -500, 0, 500, 500, 0, -500, 500, 0, 500)
+[sub_resource type="BoxShape3D" id="BoxShape3D_vrc4q"]
+size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_vrc4q"]
+[sub_resource type="Resource" id="Resource_ss4b2"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -143,10 +148,10 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_x4oov"]
+[sub_resource type="Resource" id="Resource_qjqsm"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
-rotation = Vector3(20, 360, 20)
+rotation = Vector3(10, 360, 10)
 scale = Vector3(1, 1.2, 1)
 enabled = true
 override_global_seed = false
@@ -154,14 +159,14 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_ivku7"]
+[sub_resource type="Resource" id="Resource_0fkkc"]
 script = ExtResource("6_wlxy5")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 10.0
 ray_offset = 10.0
 remove_points_on_miss = false
 align_with_collision_normal = false
-max_slope = 90.0
+max_slope = 45.0
 collision_mask = 1
 exclude_mask = 0
 enabled = true
@@ -170,7 +175,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_ss4b2"]
+[sub_resource type="Resource" id="Resource_wyi7n"]
 script = ExtResource("8_imku0")
 mask = "res://shaders/fire/HoleNoise.png"
 mask_rotation = 0.0
@@ -186,9 +191,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_qjqsm"]
+[sub_resource type="Resource" id="Resource_3rml5"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_vrc4q"), SubResource("Resource_x4oov"), SubResource("Resource_ivku7"), SubResource("Resource_ss4b2")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_ss4b2"), SubResource("Resource_qjqsm"), SubResource("Resource_0fkkc"), SubResource("Resource_wyi7n")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
@@ -225,23 +230,26 @@ volumetric_fog_ambient_inject = 0.02
 volumetric_fog_sky_affect = 0.18
 adjustment_enabled = true
 
-[node name="Node3D" type="Node3D"]
+[node name="Level" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("10_6iypd")]
-transform = Transform3D(-0.158434, 0, -0.98737, 0, 1, 0, 0.98737, 0, -0.158434, -44.3307, 3.3405, 2.61503)
-base_speed = 8.0
+transform = Transform3D(-0.448726, 0, -0.893669, 0, 1, 0, 0.893669, 0, -0.448726, -44.3307, 3.3405, 2.61503)
+sprint_speed = 1.2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_noarx")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_6iypd")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+shape = SubResource("BoxShape3D_vrc4q")
 
 [node name="ProtonScatter" type="Node3D" parent="."]
 script = ExtResource("1_4arys")
-modifier_stack = SubResource("Resource_qjqsm")
+keep_static_colliders = true
+modifier_stack = SubResource("Resource_3rml5")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -276,7 +284,7 @@ shadow_enabled = true
 environment = SubResource("Environment_6iypd")
 
 [node name="fire" parent="." instance=ExtResource("11_tereu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.6903, 0.6, 7.521)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.70023, 0.6, 7.521)
 script = ExtResource("12_cdqbm")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -302,3 +310,19 @@ transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, -51.1502, 0, 11.8321)
 
 [node name="large_rock7" parent="." instance=ExtResource("15_vrc4q")]
 transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, -51.1502, 0, 17.3252)
+
+[node name="ambient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_x4oov")
+autoplay = true
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("17_ivku7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.3902, -0.439306, 6.53647)
+
+[node name="Sketchfab_Scene2" parent="." instance=ExtResource("18_ss4b2")]
+transform = Transform3D(0.0818167, 0.563604, -0.821983, 0.996648, -0.0462673, 0.0674782, 0, -0.824748, -0.5655, -42.5916, -0.330885, 7.12433)
+
+[node name="godot_plush_sitted2" parent="." instance=ExtResource("19_qjqsm")]
+transform = Transform3D(-0.995097, 0, -0.098903, 0, 1, 0, 0.098903, 0, -0.995097, -42.9445, -0.409697, 6.25116)
+
+[node name="Sketchfab_Scene4" parent="." instance=ExtResource("21_wyi7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.6063, 0.120413, 4.18249)
