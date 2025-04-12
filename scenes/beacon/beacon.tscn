@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqjsnerwrovob"]
+
+[ext_resource type="Script" uid="uid://k45yy600c2xi" path="res://scenes/beacon/beacon.gd" id="1_r1fgj"]
+
+[node name="beacon" type="Marker3D"]
+script = ExtResource("1_r1fgj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88964, 0)
+light_color = Color(0.475107, 0.962664, 1, 1)
+omni_range = 3.0

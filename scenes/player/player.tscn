@@ -9,6 +9,21 @@
 [ext_resource type="AudioStream" uid="uid://dsmt8k1rnvx02" path="res://sound/pisadas-2.wav" id="7_fm80t"]
 [ext_resource type="AudioStream" uid="uid://cxewlvncne0o0" path="res://sound/pisadas.wav" id="8_gx1jg"]
 
+[sub_resource type="Animation" id="Animation_qek5x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../steps:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_saxjg"]
 resource_name = "head_bob"
 length = 0.5
@@ -42,21 +57,6 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0.00870516, 1, 0, 0, 0)
-
-[sub_resource type="Animation" id="Animation_qek5x"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../steps:playing")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_36ogt"]
 _data = {
@@ -165,7 +165,7 @@ libraries = {
 }
 
 [node name="luzmala_target" type="Marker3D" parent="head/camera" groups=["luzmala_target"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0581057, -0.213659)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0581057, -0.562165)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="head"]
 light_energy = 0.1
