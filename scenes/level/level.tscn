@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b78fqcqmlf850"]
+[gd_scene load_steps=44 format=3 uid="uid://b78fqcqmlf850"]
 
 [ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://bxqy10c456vum" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_6iypd"]
@@ -19,7 +19,15 @@
 [ext_resource type="PackedScene" uid="uid://vtpypmtmc2o7" path="res://models/la_pelota_de_voley.glb" id="17_ivku7"]
 [ext_resource type="PackedScene" uid="uid://chq4j3c4v2783" path="res://models/light_blue_eastpak-like_backpack.glb" id="18_ss4b2"]
 [ext_resource type="PackedScene" uid="uid://cj2lkdgtpshke" path="res://models/godot_plush_sitted.glb" id="19_qjqsm"]
+[ext_resource type="PackedScene" uid="uid://bl1hn0hug8tb6" path="res://models/scarf_dior.glb" id="21_3rml5"]
 [ext_resource type="PackedScene" uid="uid://dk1yjpqq8bxmx" path="res://models/tent.glb" id="21_wyi7n"]
+[ext_resource type="PackedScene" uid="uid://clvn0v5c6vkg0" path="res://models/cardboard_box.glb" id="22_3rml5"]
+[ext_resource type="PackedScene" uid="uid://beq2gk0j7kyo" path="res://models/old_book.glb" id="23_a5iu8"]
+[ext_resource type="PackedScene" uid="uid://c2sdemslxsrh0" path="res://models/wasteland_explorer_-_soft_drink_can.glb" id="24_b3up8"]
+[ext_resource type="PackedScene" uid="uid://5t3frq8ckqqq" path="res://models/medieval_shovel.glb" id="25_cqqhe"]
+[ext_resource type="PackedScene" uid="uid://d2rq71dgmylqo" path="res://models/stuffed_dino_toy.glb" id="26_u5w0m"]
+[ext_resource type="ArrayMesh" uid="uid://dr7xd0r2k613m" path="res://models/star_plush.res" id="27_fhw5o"]
+[ext_resource type="PackedScene" uid="uid://d0kxag4xbvw8b" path="res://models/crow_toy.glb" id="28_fhw5o"]
 
 [sub_resource type="Shader" id="Shader_vrc4q"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's StandardMaterial3D.
@@ -139,7 +147,7 @@ subdivide_depth = 400
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrc4q"]
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_ss4b2"]
+[sub_resource type="Resource" id="Resource_xm880"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -148,7 +156,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_qjqsm"]
+[sub_resource type="Resource" id="Resource_vfold"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -159,7 +167,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_0fkkc"]
+[sub_resource type="Resource" id="Resource_r732y"]
 script = ExtResource("6_wlxy5")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 10.0
@@ -175,7 +183,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_wyi7n"]
+[sub_resource type="Resource" id="Resource_87pmf"]
 script = ExtResource("8_imku0")
 mask = "res://shaders/fire/HoleNoise.png"
 mask_rotation = 0.0
@@ -191,9 +199,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_3rml5"]
+[sub_resource type="Resource" id="Resource_mf35j"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_ss4b2"), SubResource("Resource_qjqsm"), SubResource("Resource_0fkkc"), SubResource("Resource_wyi7n")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_xm880"), SubResource("Resource_vfold"), SubResource("Resource_r732y"), SubResource("Resource_87pmf")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
@@ -233,7 +241,7 @@ adjustment_enabled = true
 [node name="Level" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("10_6iypd")]
-transform = Transform3D(-0.448726, 0, -0.893669, 0, 1, 0, 0.893669, 0, -0.448726, -44.3307, 3.3405, 2.61503)
+transform = Transform3D(-0.448726, 0, -0.893669, 0, 1, 0, 0.893669, 0, -0.448726, -45.2495, 0.2, 6.18017)
 sprint_speed = 1.2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -249,7 +257,7 @@ shape = SubResource("BoxShape3D_vrc4q")
 [node name="ProtonScatter" type="Node3D" parent="."]
 script = ExtResource("1_4arys")
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_3rml5")
+modifier_stack = SubResource("Resource_mf35j")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -326,3 +334,28 @@ transform = Transform3D(-0.995097, 0, -0.098903, 0, 1, 0, 0.098903, 0, -0.995097
 
 [node name="Sketchfab_Scene4" parent="." instance=ExtResource("21_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.6063, 0.120413, 4.18249)
+
+[node name="Sketchfab_Scene3" parent="." instance=ExtResource("21_3rml5")]
+transform = Transform3D(0.96105, 7.45058e-09, -0.276375, 0.260677, -0.332227, 0.906462, -0.0918194, -0.9432, -0.319287, -42.5985, -0.403193, 6.72671)
+
+[node name="Sketchfab_Scene5" parent="." instance=ExtResource("22_3rml5")]
+transform = Transform3D(0.999782, -0.0208755, -0.000781157, 0.0208901, 0.999083, 0.0373855, 0, -0.0373937, 0.999301, -43.4198, -0.304303, 6.59065)
+
+[node name="Sketchfab_Scene6" parent="." instance=ExtResource("23_a5iu8")]
+transform = Transform3D(0.1, 0, 0, 0, 0.0955495, -0.0295008, 0, 0.0295008, 0.0955495, -43.0745, -0.377041, 5.82529)
+
+[node name="Sketchfab_Scene7" parent="." instance=ExtResource("24_b3up8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.3753, -0.303347, 5.96528)
+
+[node name="Sketchfab_Scene8" parent="." instance=ExtResource("25_cqqhe")]
+transform = Transform3D(0.480127, 0.820219, 0.310996, -0.277208, -0.194494, 0.940919, 0.832246, -0.537971, 0.13399, -46.3435, -0.232926, 5.61749)
+
+[node name="Sketchfab_Scene9" parent="." instance=ExtResource("26_u5w0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.584, -0.389397, 5.83308)
+
+[node name="StarPlush" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, 0.000214855, -0.000976646, 0, 0.000976646, 0.000214855, -42.9523, -0.352746, 6.88028)
+mesh = ExtResource("27_fhw5o")
+
+[node name="Sketchfab_Scene10" parent="." instance=ExtResource("28_fhw5o")]
+transform = Transform3D(-0.865982, 0, -0.500076, 0, 1, 0, 0.500076, 0, -0.865982, -43.6902, -0.117063, 7.57632)
