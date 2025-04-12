@@ -1,7 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwiu8nsyij4gn"]
+[gd_scene load_steps=23 format=3 uid="uid://cwiu8nsyij4gn"]
 
 [ext_resource type="Script" uid="uid://b0lcpbuqbj3kp" path="res://scenes/player/player.gd" id="1_u1w3t"]
 [ext_resource type="Texture2D" uid="uid://bubwl36108v2r" path="res://scenes/player/cursors/crosshair001.png" id="2_nq3sk"]
+[ext_resource type="AudioStream" uid="uid://c7cnc7iq5fh7q" path="res://sound/pisadas-6.wav" id="3_qek5x"]
+[ext_resource type="AudioStream" uid="uid://dehcw2ts8k1hv" path="res://sound/pisadas-5.wav" id="4_5gtgg"]
+[ext_resource type="AudioStream" uid="uid://oisl0epqtit7" path="res://sound/pisadas-4.wav" id="5_h17s1"]
+[ext_resource type="AudioStream" uid="uid://dlone8f8g81sh" path="res://sound/pisadas-3.wav" id="6_je7p5"]
+[ext_resource type="AudioStream" uid="uid://dsmt8k1rnvx02" path="res://sound/pisadas-2.wav" id="7_fm80t"]
+[ext_resource type="AudioStream" uid="uid://cxewlvncne0o0" path="res://sound/pisadas.wav" id="8_gx1jg"]
 
 [sub_resource type="Animation" id="Animation_saxjg"]
 resource_name = "head_bob"
@@ -14,6 +20,18 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.239392, 1, 0, -0.05, 0, 0.5, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../steps:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_1m4wq"]
 resource_name = "reset"
@@ -25,8 +43,24 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0.00870516, 1, 0, 0, 0)
 
+[sub_resource type="Animation" id="Animation_qek5x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../steps:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_36ogt"]
 _data = {
+&"RESET": SubResource("Animation_qek5x"),
 &"head_bob": SubResource("Animation_saxjg"),
 &"reset": SubResource("Animation_1m4wq")
 }
@@ -103,6 +137,16 @@ _data = {
 &"fadeout": SubResource("Animation_yiccl")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ugbui"]
+random_pitch = 1.1
+streams_count = 6
+stream_0/stream = ExtResource("3_qek5x")
+stream_1/stream = ExtResource("4_5gtgg")
+stream_2/stream = ExtResource("5_h17s1")
+stream_3/stream = ExtResource("6_je7p5")
+stream_4/stream = ExtResource("7_fm80t")
+stream_5/stream = ExtResource("8_gx1jg")
+
 [node name="player" type="CharacterBody3D"]
 safe_margin = 0.01
 script = ExtResource("1_u1w3t")
@@ -113,6 +157,7 @@ joy_sensitivity = 2.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250736, 0)
 
 [node name="camera" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0500212, 0)
 
 [node name="camera_animation" type="AnimationPlayer" parent="head/camera"]
 libraries = {
@@ -121,6 +166,12 @@ libraries = {
 
 [node name="luzmala_target" type="Marker3D" parent="head/camera" groups=["luzmala_target"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0581057, -0.213659)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="head"]
+light_energy = 0.1
+spot_range = 2.94
+spot_angle = 60.82
+spot_angle_attenuation = 2.92816
 
 [node name="collision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_phygr")
@@ -185,5 +236,10 @@ libraries = {
 [node name="safe_position_logger" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="steps" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ugbui")
+max_polyphony = 2
+bus = &"SFX"
 
 [connection signal="timeout" from="safe_position_logger" to="." method="_on_safe_position_logger_timeout"]
