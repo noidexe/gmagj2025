@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 			if global_position.distance_squared_to(target.global_position) <= 9:
 				follow()
 		State.FOLLOW:
-			global_position = global_position.lerp(target.global_position, 1 - 0.1 ** delta)
+			global_position = global_position.lerp(target.global_position, 1 - 0.2 ** delta)
 			if not is_target_reached and global_position.distance_squared_to(target.global_position) <= 0.01:
 				is_target_reached = true
 		State.LEAVE:
