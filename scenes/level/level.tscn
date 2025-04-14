@@ -150,7 +150,7 @@ subdivide_depth = 400
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrc4q"]
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_vfold"]
+[sub_resource type="Resource" id="Resource_r732y"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -159,7 +159,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_r732y"]
+[sub_resource type="Resource" id="Resource_87pmf"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -170,7 +170,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_87pmf"]
+[sub_resource type="Resource" id="Resource_mf35j"]
 script = ExtResource("6_wlxy5")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 10.0
@@ -186,7 +186,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_mf35j"]
+[sub_resource type="Resource" id="Resource_t51ir"]
 script = ExtResource("8_imku0")
 mask = "res://shaders/fire/HoleNoise.png"
 mask_rotation = 0.0
@@ -202,9 +202,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_t51ir"]
+[sub_resource type="Resource" id="Resource_hfr1v"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_vfold"), SubResource("Resource_r732y"), SubResource("Resource_87pmf"), SubResource("Resource_mf35j")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_r732y"), SubResource("Resource_87pmf"), SubResource("Resource_mf35j"), SubResource("Resource_t51ir")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
@@ -243,13 +243,15 @@ fog_height_density = 0.5
 volumetric_fog_enabled = true
 volumetric_fog_ambient_inject = 16.0
 volumetric_fog_sky_affect = 0.096
+adjustment_enabled = true
 
-[node name="Level" type="Node3D" node_paths=PackedStringArray("beacons")]
+[node name="Level" type="Node3D" node_paths=PackedStringArray("beacons", "firespawnpoints")]
 script = ExtResource("1_xm880")
-beacons = [NodePath("beacon")]
+beacons = [NodePath("beacon_backpack"), NodePath("beacon_godot")]
+firespawnpoints = [NodePath("spawn2")]
 
 [node name="player" parent="." instance=ExtResource("10_6iypd")]
-transform = Transform3D(-0.448726, 0, -0.893669, 0, 1, 0, 0.893669, 0, -0.448726, -45.2495, 0.2, 6.18017)
+transform = Transform3D(0.14173, 0, 0.989905, 0, 1, 0, -0.989905, 0, 0.14173, -46.155, 0.2, 4.98151)
 sprint_speed = 1.2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -265,7 +267,7 @@ shape = SubResource("BoxShape3D_vrc4q")
 [node name="ProtonScatter" type="Node3D" parent="."]
 script = ExtResource("1_4arys")
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_t51ir")
+modifier_stack = SubResource("Resource_hfr1v")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -287,6 +289,7 @@ visibility_range_end = 30.0
 path = "uid://b8abs8me7ckgo"
 
 [node name="ScatterShape" type="Node3D" parent="ProtonScatter"]
+visible = false
 script = ExtResource("8_tcnuu")
 shape = SubResource("Resource_s0gvp")
 
@@ -306,7 +309,7 @@ directional_shadow_max_distance = 30.0
 environment = SubResource("Environment_6iypd")
 
 [node name="fire" parent="." instance=ExtResource("11_tereu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.9638, 0.6, 0.594757)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.06, 0.6, 11.3043)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.636536, 0, -0.771247, 0, 1, 0, 0.771247, 0, 0.636536, -45.277, 0.981065, 8.90952)
@@ -337,20 +340,26 @@ stream = ExtResource("16_x4oov")
 autoplay = true
 bus = &"Ambience"
 
-[node name="beacon" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9254, -0.330885, 7.71393)
+[node name="beacon_backpack" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.0509, -0.204745, 6.17601)
 
-[node name="model" parent="beacon" instance=ExtResource("18_ss4b2")]
-transform = Transform3D(0.0818167, 0.563604, -0.821983, 0.996648, -0.0462673, 0.0674782, 0, -0.824748, -0.5655, 0, 0, 0)
+[node name="model" parent="beacon_backpack" instance=ExtResource("18_ss4b2")]
+transform = Transform3D(-0.414799, 0.433584, -0.799966, 0.427578, 0.868935, 0.249259, 0.803194, -0.238656, -0.545824, 0.0141758, 0.066668, 0.0096687)
 
-[node name="Camera3D" type="Camera3D" parent="beacon"]
-transform = Transform3D(-0.562807, 0.401313, -0.72263, 0, 0.874234, 0.485506, 0.826588, 0.273246, -0.492025, -1.07183, 0.810516, -0.800709)
-
-[node name="godot_plush_sitted2" parent="." instance=ExtResource("19_qjqsm")]
-transform = Transform3D(0.995302, 0, -0.0968184, 0, 1, 0, 0.0968184, 0, 0.995302, -43.5177, -0.367777, 4.55)
+[node name="Camera3D" type="Camera3D" parent="beacon_backpack"]
+transform = Transform3D(0.342019, 0.235281, -0.909761, 0, 0.968148, 0.250381, 0.939693, -0.0856351, 0.331126, -1.34424, 0.478344, 0.510192)
 
 [node name="Sketchfab_Scene4" parent="." instance=ExtResource("21_wyi7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.6063, 0.120413, 4.18249)
+
+[node name="beacon_godot" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(0.758328, 0, 0.651873, 0, 1, 0, -0.651873, 0, 0.758328, -32.6877, -0.274801, 7.79106)
+
+[node name="model" parent="beacon_godot" instance=ExtResource("19_qjqsm")]
+transform = Transform3D(0.995302, 0, -0.0968184, 0, 1, 0, 0.0968184, 0, 0.995302, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="beacon_godot"]
+transform = Transform3D(-0.991292, 0.084645, -0.100876, 0, 0.766044, 0.642788, 0.131684, 0.63719, -0.759374, -0.164064, 1.06079, -1.25709)
 
 [node name="Sketchfab_Scene3" parent="." instance=ExtResource("21_3rml5")]
 transform = Transform3D(0.96105, 7.45058e-09, -0.276375, 0.260677, -0.332227, 0.906462, -0.0918194, -0.9432, -0.319287, -42.5985, -0.403193, 6.72671)
@@ -382,7 +391,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.4131, -0.473722, 6.72725)
 
 [node name="vision_sfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_r732y")
+volume_db = -10.0
 pitch_scale = 0.5
+
+[node name="spawn2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.847, 0, 4.0433)
 
 [connection signal="state_changed" from="fire" to="." method="_on_fire_state_changed"]
 [connection signal="target_reached" from="fire" to="." method="_on_fire_target_reached"]

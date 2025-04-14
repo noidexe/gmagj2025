@@ -154,7 +154,7 @@ jump_velocity = 0.0
 joy_sensitivity = 2.5
 
 [node name="head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250736, 0)
+transform = Transform3D(1, 0, 0, 0, 0.844244, -0.535959, 0, 0.535959, 0.844244, 0, 0.250736, 0)
 
 [node name="camera" type="Camera3D" parent="head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0500212, 0)
@@ -209,6 +209,7 @@ mouse_filter = 2
 texture = ExtResource("2_nq3sk")
 
 [node name="vignette" type="TextureRect" parent="HUD/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
