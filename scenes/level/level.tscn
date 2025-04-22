@@ -1,12 +1,16 @@
-[gd_scene load_steps=55 format=3 uid="uid://b78fqcqmlf850"]
+[gd_scene load_steps=56 format=3 uid="uid://b78fqcqmlf850"]
 
 [ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://cijt0tsfkuebm" path="res://scenes/level/level.gd" id="1_xm880"]
 [ext_resource type="Script" uid="uid://bxqy10c456vum" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_6iypd"]
-[ext_resource type="Texture2D" uid="uid://c8xom1fkdkito" path="res://textures/Texturelabs_Soil_135M.jpg" id="2_pm6rs"]
+[ext_resource type="Texture2D" uid="uid://cj5hwqylnkpdy" path="res://textures/forest_leaves_02_1k.blend/textures/forest_leaves_02_diffuse_1k.jpg" id="3_87pmf"]
+[ext_resource type="Shader" uid="uid://bjmif2hwrtqsa" path="res://shaders/ground/ground2.gdshader" id="3_mf35j"]
 [ext_resource type="Script" uid="uid://dg7v6ju7f8bjo" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="3_tereu"]
 [ext_resource type="Script" uid="uid://bq15kb8qk5edp" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="4_cdqbm"]
+[ext_resource type="Texture2D" uid="uid://cs331mywwmdtp" path="res://textures/forest_leaves_02_1k.blend/textures/forest_leaves_02_arm_1k.png" id="4_mf35j"]
 [ext_resource type="Script" uid="uid://c8855cuhoq1dh" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="5_imku0"]
+[ext_resource type="Texture2D" uid="uid://doevwenwehp7n" path="res://textures/forest_leaves_02_1k.blend/textures/forest_leaves_02_nor_gl_1k.png" id="5_t51ir"]
+[ext_resource type="Texture2D" uid="uid://dqw58od0na5sh" path="res://shaders/ground/ground_height_texture.tres" id="6_t51ir"]
 [ext_resource type="Script" uid="uid://bukqkiw4jmfv3" path="res://addons/proton_scatter/src/scatter_item.gd" id="7_3v7ru"]
 [ext_resource type="Script" uid="uid://csws0p4mgth7w" path="res://addons/proton_scatter/src/modifiers/clusterize.gd" id="8_imku0"]
 [ext_resource type="Script" uid="uid://dtogghid4plak" path="res://addons/proton_scatter/src/scatter_shape.gd" id="8_tcnuu"]
@@ -31,117 +35,34 @@
 [ext_resource type="PackedScene" uid="uid://d07frwr2k71m" path="res://models/old_soccer_ball.glb" id="29_xm880"]
 [ext_resource type="AudioStream" uid="uid://y2hw2hdpuvuh" path="res://sound/339818__inspectorj__hand-bells-g-single.wav" id="31_r732y"]
 
-[sub_resource type="Shader" id="Shader_vrc4q"]
-code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's StandardMaterial3D.
-
-shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
-
-uniform vec4 albedo : source_color;
-uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
-uniform ivec2 albedo_texture_size;
-uniform float point_size : hint_range(0.1, 128.0, 0.1);
-
-uniform float roughness : hint_range(0.0, 1.0);
-uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
-uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
-
-uniform float specular : hint_range(0.0, 1.0, 0.01);
-uniform float metallic : hint_range(0.0, 1.0, 0.01);
-varying vec3 uv1_triplanar_pos;
-
-uniform float uv1_blend_sharpness : hint_range(0.0, 150.0, 0.001);
-varying vec3 uv1_power_normal;
-
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
-
-uniform sampler2D texture_height : hint_default_white, filter_linear_mipmap, repeat_enable;
-uniform float height_ratio : hint_range(0.0, 1.0);
-
-void vertex() {
-	vec3 normal = NORMAL;
-
-	TANGENT = vec3(0.0, 0.0, -1.0) * abs(normal.x);
-	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.y);
-	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.z);
-	TANGENT = normalize(TANGENT);
-
-	BINORMAL = vec3(0.0, 1.0, 0.0) * abs(normal.x);
-	BINORMAL += vec3(0.0, 0.0, -1.0) * abs(normal.y);
-	BINORMAL += vec3(0.0, 1.0, 0.0) * abs(normal.z);
-	BINORMAL = normalize(BINORMAL);
-
-	// UV1 Triplanar: Enabled
-	uv1_power_normal = pow(abs(NORMAL), vec3(uv1_blend_sharpness));
-	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
-	uv1_power_normal /= dot(uv1_power_normal, vec3(1.0));
-	uv1_triplanar_pos *= vec3(1.0, -1.0, 1.0);
-	
-	VERTEX.y += -0.5 + 2.0 * texture(texture_height, UV).r * height_ratio; 
-}
-
-vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {
-	vec4 samp = vec4(0.0);
-	samp += texture(p_sampler, p_triplanar_pos.xy) * p_weights.z;
-	samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
-	samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
-	return samp;
-}
-
-void fragment() {
-	vec4 albedo_tex = triplanar_texture(texture_albedo, uv1_power_normal, uv1_triplanar_pos);
-
-	// Albedo Texture Force sRGB: Enabled
-	albedo_tex.rgb = mix(
-			pow((albedo_tex.rgb + vec3(0.055)) * (1.0 / (1.0 + 0.055)), vec3(2.4)),
-			albedo_tex.rgb.rgb * (1.0 / 12.92),
-			lessThan(albedo_tex.rgb, vec3(0.04045)));
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
-
-	float metallic_tex = dot(triplanar_texture(texture_metallic, uv1_power_normal, uv1_triplanar_pos), metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
-	SPECULAR = specular;
-
-	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-	float roughness_tex = dot(triplanar_texture(texture_roughness, uv1_power_normal, uv1_triplanar_pos), roughness_texture_channel);
-	ROUGHNESS = roughness_tex * roughness;
-}
-"
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vrc4q"]
-noise_type = 5
-frequency = 0.1356
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x4oov"]
-width = 800
-height = 400
-noise = SubResource("FastNoiseLite_vrc4q")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x4oov"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t51ir"]
 render_priority = 0
-shader = SubResource("Shader_vrc4q")
-shader_parameter/albedo = Color(0.863349, 0.753784, 0.753887, 1)
-shader_parameter/texture_albedo = ExtResource("2_pm6rs")
-shader_parameter/albedo_texture_size = Vector2i(1920, 1281)
+shader = ExtResource("3_mf35j")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_87pmf")
+shader_parameter/albedo_texture_size = Vector2i(1024, 1024)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_metallic = ExtResource("4_mf35j")
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 1, 0)
+shader_parameter/texture_roughness = ExtResource("4_mf35j")
 shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
+shader_parameter/metallic = 1.0
+shader_parameter/texture_normal = ExtResource("5_t51ir")
+shader_parameter/normal_scale = 1.0
+shader_parameter/texture_ambient_occlusion = ExtResource("4_mf35j")
+shader_parameter/ao_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/ao_light_affect = 0.0
 shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_height = SubResource("NoiseTexture2D_x4oov")
-shader_parameter/height_ratio = 0.2
+shader_parameter/texture_height = ExtResource("6_t51ir")
+shader_parameter/height_ratio = 0.15
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
-material = SubResource("ShaderMaterial_x4oov")
+material = SubResource("ShaderMaterial_t51ir")
 size = Vector2(100, 50)
 subdivide_width = 800
 subdivide_depth = 400
@@ -149,7 +70,7 @@ subdivide_depth = 400
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrc4q"]
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_r732y"]
+[sub_resource type="Resource" id="Resource_7lsmv"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -158,7 +79,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_87pmf"]
+[sub_resource type="Resource" id="Resource_bdmju"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -169,7 +90,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_t51ir"]
+[sub_resource type="Resource" id="Resource_d6d7a"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -185,16 +106,16 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_hfr1v"]
+[sub_resource type="Resource" id="Resource_lilx5"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_r732y"), SubResource("Resource_87pmf"), SubResource("Resource_t51ir")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_7lsmv"), SubResource("Resource_bdmju"), SubResource("Resource_d6d7a")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 metadata/_custom_type_script = "uid://c002frylejmtn"
 
-[sub_resource type="Resource" id="Resource_vfold"]
+[sub_resource type="Resource" id="Resource_eipt2"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(1.2, 1.2, 1)
 enabled = true
@@ -203,7 +124,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_mf35j"]
+[sub_resource type="Resource" id="Resource_huyqb"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -214,7 +135,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_7lsmv"]
+[sub_resource type="Resource" id="Resource_wfkuu"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -230,15 +151,15 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_bdmju"]
+[sub_resource type="Resource" id="Resource_2mgdv"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_vfold"), SubResource("Resource_mf35j"), SubResource("Resource_7lsmv")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_eipt2"), SubResource("Resource_huyqb"), SubResource("Resource_wfkuu")])
 
 [sub_resource type="Resource" id="Resource_uhw4h"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_d6d7a"]
+[sub_resource type="Resource" id="Resource_v0tij"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -247,7 +168,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_lilx5"]
+[sub_resource type="Resource" id="Resource_cumia"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -258,7 +179,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_eipt2"]
+[sub_resource type="Resource" id="Resource_eim2y"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -274,9 +195,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_huyqb"]
+[sub_resource type="Resource" id="Resource_gjaaf"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_d6d7a"), SubResource("Resource_lilx5"), SubResource("Resource_eipt2")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_v0tij"), SubResource("Resource_cumia"), SubResource("Resource_eim2y")])
 
 [sub_resource type="Resource" id="Resource_4u3nd"]
 script = ExtResource("9_tuemg")
@@ -339,7 +260,7 @@ shape = SubResource("BoxShape3D_vrc4q")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_hfr1v")
+modifier_stack = SubResource("Resource_lilx5")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -360,7 +281,7 @@ shape = SubResource("Resource_s0gvp")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_bdmju")
+modifier_stack = SubResource("Resource_2mgdv")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -380,7 +301,7 @@ shape = SubResource("Resource_uhw4h")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_huyqb")
+modifier_stack = SubResource("Resource_gjaaf")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -398,7 +319,7 @@ shape = SubResource("Resource_4u3nd")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.863285, 0.243078, -0.442326, 0.498094, -0.268799, 0.824409, 0.0814991, -0.932019, -0.353126, -3.60171, 38.2331, 2.43836)
 light_color = Color(0.819608, 0.929412, 1, 1)
-light_energy = 0.1
+light_energy = 0.01
 light_volumetric_fog_energy = 2.8
 light_bake_mode = 1
 shadow_enabled = true
