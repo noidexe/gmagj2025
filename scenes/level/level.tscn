@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b78fqcqmlf850"]
+[gd_scene load_steps=55 format=3 uid="uid://b78fqcqmlf850"]
 
 [ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://cijt0tsfkuebm" path="res://scenes/level/level.gd" id="1_xm880"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://dg7v6ju7f8bjo" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="3_tereu"]
 [ext_resource type="Script" uid="uid://bq15kb8qk5edp" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="4_cdqbm"]
 [ext_resource type="Script" uid="uid://c8855cuhoq1dh" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="5_imku0"]
-[ext_resource type="Script" uid="uid://cc51w7q8nipfb" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="6_wlxy5"]
 [ext_resource type="Script" uid="uid://bukqkiw4jmfv3" path="res://addons/proton_scatter/src/scatter_item.gd" id="7_3v7ru"]
 [ext_resource type="Script" uid="uid://csws0p4mgth7w" path="res://addons/proton_scatter/src/modifiers/clusterize.gd" id="8_imku0"]
 [ext_resource type="Script" uid="uid://dtogghid4plak" path="res://addons/proton_scatter/src/scatter_shape.gd" id="8_tcnuu"]
@@ -170,22 +169,6 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_mf35j"]
-script = ExtResource("6_wlxy5")
-ray_direction = Vector3(0, -1, 0)
-ray_length = 10.0
-ray_offset = 10.0
-remove_points_on_miss = false
-align_with_collision_normal = false
-max_slope = 45.0
-collision_mask = 1
-exclude_mask = 0
-enabled = true
-override_global_seed = false
-custom_seed = 0
-restrict_height = false
-reference_frame = 0
-
 [sub_resource type="Resource" id="Resource_t51ir"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
@@ -195,7 +178,7 @@ mask_scale = Vector2(1, 1)
 pixel_to_unit_ratio = 8.0
 remove_below = 0.5
 remove_above = 1.0
-scale_transforms = true
+scale_transforms = false
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -204,12 +187,100 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_hfr1v"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_r732y"), SubResource("Resource_87pmf"), SubResource("Resource_mf35j"), SubResource("Resource_t51ir")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_r732y"), SubResource("Resource_87pmf"), SubResource("Resource_t51ir")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 metadata/_custom_type_script = "uid://c002frylejmtn"
+
+[sub_resource type="Resource" id="Resource_vfold"]
+script = ExtResource("4_cdqbm")
+spacing = Vector3(1.2, 1.2, 1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_mf35j"]
+script = ExtResource("5_imku0")
+position = Vector3(0, 0, 0)
+rotation = Vector3(10, 360, 10)
+scale = Vector3(1, 1.2, 1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_7lsmv"]
+script = ExtResource("8_imku0")
+mask = "res://textures/base_maze.png"
+mask_rotation = 0.0
+mask_offset = Vector2(400, 200)
+mask_scale = Vector2(1, 1)
+pixel_to_unit_ratio = 8.0
+remove_below = 0.5
+remove_above = 1.0
+scale_transforms = false
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_bdmju"]
+script = ExtResource("2_6iypd")
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_vfold"), SubResource("Resource_mf35j"), SubResource("Resource_7lsmv")])
+
+[sub_resource type="Resource" id="Resource_uhw4h"]
+script = ExtResource("9_tuemg")
+size = Vector3(100, 1, 50)
+
+[sub_resource type="Resource" id="Resource_d6d7a"]
+script = ExtResource("4_cdqbm")
+spacing = Vector3(0.8, 0.8, 1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_lilx5"]
+script = ExtResource("5_imku0")
+position = Vector3(0, 0, 0)
+rotation = Vector3(10, 360, 10)
+scale = Vector3(1, 1.2, 1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_eipt2"]
+script = ExtResource("8_imku0")
+mask = "res://textures/base_maze.png"
+mask_rotation = 0.0
+mask_offset = Vector2(400, 200)
+mask_scale = Vector2(1, 1)
+pixel_to_unit_ratio = 8.0
+remove_below = 0.5
+remove_above = 1.0
+scale_transforms = false
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_huyqb"]
+script = ExtResource("2_6iypd")
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_d6d7a"), SubResource("Resource_lilx5"), SubResource("Resource_eipt2")])
+
+[sub_resource type="Resource" id="Resource_4u3nd"]
+script = ExtResource("9_tuemg")
+size = Vector3(100, 1, 50)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vfold"]
 panorama = ExtResource("13_xm880")
@@ -243,6 +314,7 @@ fog_height_density = 0.5
 volumetric_fog_enabled = true
 volumetric_fog_ambient_inject = 16.0
 volumetric_fog_sky_affect = 0.096
+volumetric_fog_temporal_reprojection_enabled = false
 adjustment_enabled = true
 
 [node name="Level" type="Node3D" node_paths=PackedStringArray("beacons", "firespawnpoints")]
@@ -252,44 +324,76 @@ firespawnpoints = [NodePath("spawn2"), NodePath("spawn3"), NodePath("spawn4"), N
 
 [node name="player" parent="." instance=ExtResource("10_6iypd")]
 transform = Transform3D(0.14173, 0, 0.989905, 0, 1, 0, -0.989905, 0, 0.14173, -45.5248, 0.2, 21.6672)
-sprint_speed = 1.2
+sprint_speed = 8.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_noarx")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
 shape = SubResource("BoxShape3D_vrc4q")
 
-[node name="ProtonScatter" type="Node3D" parent="."]
+[node name="Bushes" type="Node3D" parent="."]
 script = ExtResource("1_4arys")
+global_seed = 3
 keep_static_colliders = true
 modifier_stack = SubResource("Resource_hfr1v")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
-[node name="Trees" type="Node3D" parent="ProtonScatter"]
-script = ExtResource("7_3v7ru")
-proportion = 0
-path = "uid://caqxfqurbp3ku"
-
-[node name="Rocks" type="Node3D" parent="ProtonScatter"]
-script = ExtResource("7_3v7ru")
-proportion = 10
-path = "uid://bltmr2xgs8nq1"
-
-[node name="Bushes" type="Node3D" parent="ProtonScatter"]
+[node name="Bushes" type="Node3D" parent="Bushes"]
 script = ExtResource("7_3v7ru")
 proportion = 50
+source_scale_multiplier = 0.75
+visibility_range_end = 30.0
 path = "uid://b8abs8me7ckgo"
 
-[node name="ScatterShape" type="Node3D" parent="ProtonScatter"]
+[node name="ScatterShape" type="Node3D" parent="Bushes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.203551, 0)
 visible = false
 script = ExtResource("8_tcnuu")
 shape = SubResource("Resource_s0gvp")
+
+[node name="Rocks" type="Node3D" parent="."]
+script = ExtResource("1_4arys")
+global_seed = 3
+keep_static_colliders = true
+modifier_stack = SubResource("Resource_bdmju")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="Rocks" type="Node3D" parent="Rocks"]
+script = ExtResource("7_3v7ru")
+source_scale_multiplier = 0.5
+visibility_range_end = 30.0
+path = "uid://bltmr2xgs8nq1"
+
+[node name="ScatterShape" type="Node3D" parent="Rocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.116315, 0)
+visible = false
+script = ExtResource("8_tcnuu")
+shape = SubResource("Resource_uhw4h")
+
+[node name="Trees" type="Node3D" parent="."]
+script = ExtResource("1_4arys")
+global_seed = 3
+keep_static_colliders = true
+modifier_stack = SubResource("Resource_huyqb")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="Trees" type="Node3D" parent="Trees"]
+script = ExtResource("7_3v7ru")
+visibility_range_end = 30.0
+path = "uid://caqxfqurbp3ku"
+
+[node name="ScatterShape" type="Node3D" parent="Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0193859, 0)
+visible = false
+script = ExtResource("8_tcnuu")
+shape = SubResource("Resource_4u3nd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.863285, 0.243078, -0.442326, 0.498094, -0.268799, 0.824409, 0.0814991, -0.932019, -0.353126, -3.60171, 38.2331, 2.43836)
