@@ -1,16 +1,13 @@
-[gd_scene load_steps=56 format=3 uid="uid://b78fqcqmlf850"]
+[gd_scene load_steps=54 format=3 uid="uid://b78fqcqmlf850"]
 
 [ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://cijt0tsfkuebm" path="res://scenes/level/level.gd" id="1_xm880"]
 [ext_resource type="Script" uid="uid://bxqy10c456vum" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_6iypd"]
-[ext_resource type="Texture2D" uid="uid://cj5hwqylnkpdy" path="res://textures/forest_leaves_02_1k.blend/textures/forest_leaves_02_diffuse_1k.jpg" id="3_87pmf"]
-[ext_resource type="Shader" uid="uid://bjmif2hwrtqsa" path="res://shaders/ground/ground2.gdshader" id="3_mf35j"]
+[ext_resource type="Material" uid="uid://dngpqyenfhcef" path="res://shaders/ground/ground2.material" id="3_r732y"]
 [ext_resource type="Script" uid="uid://dg7v6ju7f8bjo" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="3_tereu"]
+[ext_resource type="Texture2D" uid="uid://c2k45q6swnewq" path="res://textures/base_maze.png" id="3_vfold"]
 [ext_resource type="Script" uid="uid://bq15kb8qk5edp" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="4_cdqbm"]
-[ext_resource type="Texture2D" uid="uid://cs331mywwmdtp" path="res://textures/forest_leaves_02_1k.blend/textures/forest_leaves_02_arm_1k.png" id="4_mf35j"]
 [ext_resource type="Script" uid="uid://c8855cuhoq1dh" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="5_imku0"]
-[ext_resource type="Texture2D" uid="uid://doevwenwehp7n" path="res://textures/forest_leaves_02_1k.blend/textures/forest_leaves_02_nor_gl_1k.png" id="5_t51ir"]
-[ext_resource type="Texture2D" uid="uid://dqw58od0na5sh" path="res://shaders/ground/ground_height_texture.tres" id="6_t51ir"]
 [ext_resource type="Script" uid="uid://bukqkiw4jmfv3" path="res://addons/proton_scatter/src/scatter_item.gd" id="7_3v7ru"]
 [ext_resource type="Script" uid="uid://csws0p4mgth7w" path="res://addons/proton_scatter/src/modifiers/clusterize.gd" id="8_imku0"]
 [ext_resource type="Script" uid="uid://dtogghid4plak" path="res://addons/proton_scatter/src/scatter_shape.gd" id="8_tcnuu"]
@@ -35,34 +32,8 @@
 [ext_resource type="PackedScene" uid="uid://d07frwr2k71m" path="res://models/old_soccer_ball.glb" id="29_xm880"]
 [ext_resource type="AudioStream" uid="uid://y2hw2hdpuvuh" path="res://sound/339818__inspectorj__hand-bells-g-single.wav" id="31_r732y"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t51ir"]
-render_priority = 0
-shader = ExtResource("3_mf35j")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("3_87pmf")
-shader_parameter/albedo_texture_size = Vector2i(1024, 1024)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/texture_metallic = ExtResource("4_mf35j")
-shader_parameter/metallic_texture_channel = Vector4(0, 0, 1, 0)
-shader_parameter/texture_roughness = ExtResource("4_mf35j")
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 1.0
-shader_parameter/texture_normal = ExtResource("5_t51ir")
-shader_parameter/normal_scale = 1.0
-shader_parameter/texture_ambient_occlusion = ExtResource("4_mf35j")
-shader_parameter/ao_texture_channel = Vector4(1, 0, 0, 0)
-shader_parameter/ao_light_affect = 0.0
-shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_height = ExtResource("6_t51ir")
-shader_parameter/height_ratio = 0.15
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
-material = SubResource("ShaderMaterial_t51ir")
+material = ExtResource("3_r732y")
 size = Vector2(100, 50)
 subdivide_width = 800
 subdivide_depth = 400
@@ -70,7 +41,17 @@ subdivide_depth = 400
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrc4q"]
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_7lsmv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r732y"]
+shading_mode = 0
+albedo_texture = ExtResource("3_vfold")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_87pmf"]
+material = SubResource("StandardMaterial3D_r732y")
+size = Vector2(100, 50)
+subdivide_width = 800
+subdivide_depth = 400
+
+[sub_resource type="Resource" id="Resource_r732y"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -79,7 +60,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_bdmju"]
+[sub_resource type="Resource" id="Resource_87pmf"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -90,7 +71,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_d6d7a"]
+[sub_resource type="Resource" id="Resource_mf35j"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -106,16 +87,16 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_lilx5"]
+[sub_resource type="Resource" id="Resource_t51ir"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_7lsmv"), SubResource("Resource_bdmju"), SubResource("Resource_d6d7a")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_r732y"), SubResource("Resource_87pmf"), SubResource("Resource_mf35j")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 metadata/_custom_type_script = "uid://c002frylejmtn"
 
-[sub_resource type="Resource" id="Resource_eipt2"]
+[sub_resource type="Resource" id="Resource_hfr1v"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(1.2, 1.2, 1)
 enabled = true
@@ -124,7 +105,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_huyqb"]
+[sub_resource type="Resource" id="Resource_7lsmv"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -135,7 +116,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_wfkuu"]
+[sub_resource type="Resource" id="Resource_bdmju"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -151,15 +132,15 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_2mgdv"]
+[sub_resource type="Resource" id="Resource_d6d7a"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_eipt2"), SubResource("Resource_huyqb"), SubResource("Resource_wfkuu")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_hfr1v"), SubResource("Resource_7lsmv"), SubResource("Resource_bdmju")])
 
 [sub_resource type="Resource" id="Resource_uhw4h"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_v0tij"]
+[sub_resource type="Resource" id="Resource_lilx5"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -168,7 +149,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_cumia"]
+[sub_resource type="Resource" id="Resource_eipt2"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -179,7 +160,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_eim2y"]
+[sub_resource type="Resource" id="Resource_huyqb"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -195,9 +176,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_gjaaf"]
+[sub_resource type="Resource" id="Resource_wfkuu"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_v0tij"), SubResource("Resource_cumia"), SubResource("Resource_eim2y")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_lilx5"), SubResource("Resource_eipt2"), SubResource("Resource_huyqb")])
 
 [sub_resource type="Resource" id="Resource_4u3nd"]
 script = ExtResource("9_tuemg")
@@ -240,7 +221,8 @@ adjustment_enabled = true
 
 [node name="Level" type="Node3D" node_paths=PackedStringArray("beacons", "firespawnpoints")]
 script = ExtResource("1_xm880")
-beacons = [NodePath("beacon_backpack"), NodePath("beacon_godot")]
+beacons = [NodePath("beacon_ball"), NodePath("beacon_godot"), NodePath("beacon_book"), NodePath("beacon_soda_can"), NodePath("beacon_shovel"), NodePath("beacon_box"), NodePath("beacon_handkerchief"), NodePath("beacon_starplush"), NodePath("beacon_tent"), NodePath("beacon_backpack"), NodePath("beacon_bird"), NodePath("beacon_nahuelito")]
+beacons_per_vision = Array[int]([4, 2, 2, 4])
 firespawnpoints = [NodePath("spawn2"), NodePath("spawn3"), NodePath("spawn4"), NodePath("spawn5")]
 
 [node name="player" parent="." instance=ExtResource("10_6iypd")]
@@ -256,11 +238,14 @@ mesh = SubResource("PlaneMesh_noarx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
 shape = SubResource("BoxShape3D_vrc4q")
 
+[node name="maze_preview" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_87pmf")
+
 [node name="Bushes" type="Node3D" parent="."]
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_lilx5")
+modifier_stack = SubResource("Resource_t51ir")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -281,7 +266,7 @@ shape = SubResource("Resource_s0gvp")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_2mgdv")
+modifier_stack = SubResource("Resource_d6d7a")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -301,7 +286,7 @@ shape = SubResource("Resource_uhw4h")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_gjaaf")
+modifier_stack = SubResource("Resource_wfkuu")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -363,54 +348,125 @@ stream = ExtResource("16_x4oov")
 autoplay = true
 bus = &"Ambience"
 
-[node name="beacon_backpack" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5097, -0.204745, -19.1332)
+[node name="beacon_ball" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4486, -0.405101, -20.797)
 
-[node name="model" parent="beacon_backpack" instance=ExtResource("18_ss4b2")]
-transform = Transform3D(-0.414799, 0.433584, -0.799966, 0.427578, 0.868935, 0.249259, 0.803194, -0.238656, -0.545824, 0.0141758, 0.066668, 0.0096687)
+[node name="model" parent="beacon_ball" instance=ExtResource("29_xm880")]
 
-[node name="Camera3D" type="Camera3D" parent="beacon_backpack"]
-transform = Transform3D(0.342019, 0.235281, -0.909761, 0, 0.968148, 0.250381, 0.939693, -0.0856351, 0.331126, -1.34424, 0.478344, 0.510192)
-
-[node name="Sketchfab_Scene4" parent="." instance=ExtResource("21_wyi7n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.6063, 0.120413, 4.18249)
+[node name="Camera3D" type="Camera3D" parent="beacon_ball"]
+transform = Transform3D(0.873471, -0.00599637, -0.486839, 0.118113, 0.972664, 0.199934, 0.472332, -0.232138, 0.850302, -2.09164, 0.942183, 3.33695)
+fov = 32.4
 
 [node name="beacon_godot" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(0.758328, 0, 0.651873, 0, 1, 0, -0.651873, 0, 0.758328, -21.1295, -0.274801, -5.69474)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4728, -0.392371, -6.21851)
 
 [node name="model" parent="beacon_godot" instance=ExtResource("19_qjqsm")]
-transform = Transform3D(0.995302, 0, -0.0968184, 0, 1, 0, 0.0968184, 0, 0.995302, 0, 0, 0)
+transform = Transform3D(0.998236, 0.163807, 1.10756, -7.45058e-09, 1.48386, -0.219461, -1.11961, 0.146049, 0.987494, -0.032808, -0.0126323, -0.0742058)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_godot"]
-transform = Transform3D(-0.991292, 0.084645, -0.100876, 0, 0.766044, 0.642788, 0.131684, 0.63719, -0.759374, -0.164064, 1.06079, -1.25709)
+transform = Transform3D(-0.990192, -0.0167651, 0.138708, -0.0145433, 0.999749, 0.017016, -0.138958, 0.0148318, -0.990187, -0.42288, 0.232521, -1.06161)
+fov = 50.7
 
-[node name="Sketchfab_Scene3" parent="." instance=ExtResource("21_3rml5")]
-transform = Transform3D(0.96105, 7.45058e-09, -0.276375, 0.260677, -0.332227, 0.906462, -0.0918194, -0.9432, -0.319287, -42.5985, -0.403193, 6.72671)
+[node name="beacon_book" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(-0.012313, -0.0927751, 0.0352303, -0.00436664, 0.0359725, 0.0932036, -0.0991429, 0.00993781, -0.00848046, -29.7297, -0.160143, 15.0647)
 
-[node name="Sketchfab_Scene5" parent="." instance=ExtResource("22_3rml5")]
-transform = Transform3D(0.999782, -0.0208755, -0.000781157, 0.0208901, 0.999083, 0.0373855, 0, -0.0373937, 0.999301, -43.4198, -0.304303, 6.59065)
+[node name="model" parent="beacon_book" instance=ExtResource("23_a5iu8")]
+transform = Transform3D(1, -7.45058e-09, 1.49012e-08, 7.45058e-09, 1, 9.31323e-10, -7.45058e-09, 9.31323e-10, 1, 0, 0, 0)
 
-[node name="Sketchfab_Scene6" parent="." instance=ExtResource("23_a5iu8")]
-transform = Transform3D(0.1, 0, 0, 0, 0.0955495, -0.0295008, 0, 0.0295008, 0.0955495, -43.0745, -0.377041, 5.82529)
+[node name="Camera3D" type="Camera3D" parent="beacon_book"]
+transform = Transform3D(-5.17323, -0.818102, 8.51871, 7.91888, 3.31666, 5.12748, -3.24485, 9.39843, -1.06794, 6.18659, 8.0351, -1.95877)
+fov = 45.0
 
-[node name="Sketchfab_Scene7" parent="." instance=ExtResource("24_b3up8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.3753, -0.303347, 5.96528)
+[node name="beacon_soda_can" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8438, -0.318322, 8.25857)
 
-[node name="Sketchfab_Scene8" parent="." instance=ExtResource("25_cqqhe")]
-transform = Transform3D(0.480127, 0.820219, 0.310996, -0.277208, -0.194494, 0.940919, 0.832246, -0.537971, 0.13399, -46.3435, -0.232926, 5.61749)
+[node name="model" parent="beacon_soda_can" instance=ExtResource("24_b3up8")]
+transform = Transform3D(0.284076, 0.257493, -0.923579, 0.0315403, 0.960233, 0.277413, 0.958283, -0.107936, 0.264657, 0, 0, 0)
 
-[node name="Sketchfab_Scene9" parent="." instance=ExtResource("26_u5w0m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.584, -0.389397, 5.83308)
+[node name="Camera3D" type="Camera3D" parent="beacon_soda_can"]
+transform = Transform3D(0.67559, 0.00262977, -0.737273, 0, 0.999994, 0.00356686, 0.737278, -0.00240973, 0.675586, -0.0766762, 0.0273303, 0.139678)
+fov = 50.0
 
-[node name="StarPlush" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.001, 0, 0, 0, 0.000214855, -0.000976646, 0, 0.000976646, 0.000214855, -42.9523, -0.352746, 6.88028)
+[node name="beacon_shovel" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96144, -0.377613, 17.3616)
+
+[node name="model" parent="beacon_shovel" instance=ExtResource("25_cqqhe")]
+transform = Transform3D(-0.322563, -0.0415213, -0.945637, -0.940282, -0.100708, 0.325158, -0.108734, 0.994049, -0.00655713, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="beacon_shovel"]
+transform = Transform3D(0.74058, 0.600059, -0.302436, -0.0789762, 0.524683, 0.847625, 0.667309, -0.60385, 0.435961, -0.945058, 2.82561, 1.38883)
+fov = 38.1
+
+[node name="beacon_box" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273804, -0.234731, 3.55654)
+
+[node name="model" parent="beacon_box" instance=ExtResource("22_3rml5")]
+transform = Transform3D(-0.826584, 0.0226879, -0.562356, -0.0234376, 0.996933, 0.0746707, 0.562325, 0.0749019, -0.823517, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="beacon_box"]
+transform = Transform3D(0.826583, -0.0680602, 0.558683, 0.0234376, 0.995962, 0.0866541, -0.562325, -0.0585326, 0.824841, 0.415286, 0.181218, 0.617998)
+fov = 45.0
+
+[node name="beacon_handkerchief" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9959, -0.318412, -11.0161)
+
+[node name="model" parent="beacon_handkerchief" instance=ExtResource("21_3rml5")]
+transform = Transform3D(0.848771, -0.115936, -0.515894, 0.506207, -0.103752, 0.856148, -0.152784, -0.987823, -0.0293749, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="beacon_handkerchief"]
+transform = Transform3D(-0.241922, 0.100403, -0.965087, 0, 0.994631, 0.103476, 0.970295, 0.0250332, -0.240623, -0.705634, 0.186851, -0.0493413)
+fov = 54.1
+
+[node name="beacon_starplush" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 9.64819, -0.198826, -20.4758)
+
+[node name="model" type="MeshInstance3D" parent="beacon_starplush"]
+transform = Transform3D(-0.814834, 0.239563, 0.527877, 0.0747712, 0.946441, -0.3141, -0.574851, -0.216469, -0.789105, 207.021, 0, -323.426)
 mesh = ExtResource("27_fhw5o")
+skeleton = NodePath("../..")
 
-[node name="Sketchfab_Scene10" parent="." instance=ExtResource("28_fhw5o")]
-transform = Transform3D(-0.865982, 0, -0.500076, 0, 1, 0, 0.500076, 0, -0.865982, -43.4718, -0.117063, 7.45023)
+[node name="Camera3D" type="Camera3D" parent="beacon_starplush"]
+transform = Transform3D(-430508, -11815.6, -902509, 0, 999915, -13090.8, 902587, -5635.68, -430471, -567.928, 88.6653, -216.344)
 
-[node name="Sketchfab_Scene11" parent="." instance=ExtResource("29_xm880")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.4131, -0.473722, 6.72725)
+[node name="beacon_tent" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.1562, -0.792786, -15.9412)
+
+[node name="model" parent="beacon_tent" instance=ExtResource("21_wyi7n")]
+transform = Transform3D(-0.462992, -0.0244506, 0.886025, -0.0574778, 0.998344, -0.00248488, -0.884497, -0.0520772, -0.463631, 0, 0.875396, 0)
+
+[node name="Camera3D" type="Camera3D" parent="beacon_tent"]
+transform = Transform3D(-0.863841, 0.500481, -0.0574261, 0, 0.113994, 0.993481, 0.503765, 0.85821, -0.0984726, -0.196841, 3.27185, -0.337539)
+fov = 100.0
+
+[node name="beacon_backpack" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(-0.959658, 0, -0.281169, 0, 1, 0, 0.281169, 0, -0.959658, 26.4725, 0, -4.41382)
+
+[node name="model" parent="beacon_backpack" instance=ExtResource("18_ss4b2")]
+transform = Transform3D(-0.414799, 0.433584, -0.799966, 0.427578, 0.868935, 0.249259, 0.803194, -0.238656, -0.545824, 0.374897, -0.184463, -0.159483)
+
+[node name="Camera3D" type="Camera3D" parent="beacon_backpack"]
+transform = Transform3D(0.687342, 0.0532509, -0.724379, 0, 0.997309, 0.0733147, 0.726334, -0.0503923, 0.685493, -0.495697, -0.00464398, 0.107081)
+fov = 54.2
+
+[node name="beacon_bird" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.7233, -0.0312306, 7.07527)
+
+[node name="model" parent="beacon_bird" instance=ExtResource("28_fhw5o")]
+transform = Transform3D(-0.865982, -0.077022, -0.494109, 0, 0.988068, -0.154021, 0.500076, -0.133379, -0.855649, 0.249098, 0.115395, -0.147001)
+
+[node name="Camera3D" type="Camera3D" parent="beacon_bird"]
+transform = Transform3D(0.826591, 0.0583833, -0.559766, 1.49012e-08, 0.994605, 0.103737, 0.562802, -0.0857481, 0.822132, -0.0309068, 0.0772279, 0.0690567)
+fov = 45.0
+
+[node name="beacon_nahuelito" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.3078, -1.45448, 9.621)
+
+[node name="model" parent="beacon_nahuelito" instance=ExtResource("26_u5w0m")]
+transform = Transform3D(-0.485359, 0, -0.874315, 0, 1, 0, 0.874315, 0, -0.485359, 0.188643, 1.11815, -0.264167)
+
+[node name="Camera3D" type="Camera3D" parent="beacon_nahuelito"]
+transform = Transform3D(-0.815477, 0.199278, 0.543401, 0.020301, 0.948129, -0.317236, -0.578433, -0.247667, -0.777224, 0.356396, 1.18732, -1.42676)
+fov = 60.0
 
 [node name="vision_sfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_r732y")

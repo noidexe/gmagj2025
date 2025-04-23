@@ -6,11 +6,18 @@ extends Node3D
 @onready var worldenvironment : WorldEnvironment = $WorldEnvironment
 
 @export var beacons : Array[Beacon] = []
+@export var beacons_per_vision : Array[int] = []
 @export var firespawnpoints : Array[Marker3D] = []
 
 func _ready() -> void:
-	assert(not beacons.is_empty() and (beacons.size() % 2) == 0 )
-	assert(not firespawnpoints.is_empty() )
+	assert(firespawnpoints.size() == beacons_per_vision.size())
+	assert( (func() -> bool:
+			var count = 0
+			for beacons in beacons_per_vision:
+				count += beacons
+			return count == beacons.size()).call()
+		)
+	$maze_preview.queue_free()
 
 func _on_fire_state_changed(old: Variant, new: Variant) -> void:
 	match new:
@@ -21,9 +28,12 @@ func _on_fire_state_changed(old: Variant, new: Variant) -> void:
 
 
 func _on_fire_target_reached() -> void:
-	if beacons.size() < 2:
+	if beacons_per_vision.is_empty():
 		return
-	for i in 2:
+	var total_beacons : int = beacons_per_vision.pop_front()
+	if beacons.size() < total_beacons:
+		return
+	for i in total_beacons:
 		var beacon : Beacon = beacons.pop_front()
 		print("target reached")
 		$vision_sfx.play()
