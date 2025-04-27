@@ -51,6 +51,16 @@ size = Vector2(0.5, 0.5)
 [node name="fire" type="Node3D"]
 script = ExtResource("1_e4y1q")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00989723, 0)
+light_color = Color(0.560784, 0.752941, 1, 1)
+light_energy = 2.0
+light_bake_mode = 0
+shadow_enabled = true
+distance_fade_enabled = true
+omni_shadow_mode = 0
+metadata/_edit_lock_ = true
+
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 material_override = SubResource("ShaderMaterial_cs3c5")
 cast_shadow = 0
@@ -63,11 +73,4 @@ visibility_aabb = AABB(-0.75, -0.3, -0.75, 1.5, 3, 1.5)
 draw_order = 1
 process_material = SubResource("ParticleProcessMaterial_xg35s")
 draw_pass_1 = SubResource("QuadMesh_qpl1j")
-metadata/_edit_lock_ = true
-
-[node name="OmniLight3D" type="OmniLight3D" parent="GPUParticles3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00989723, 0)
-light_color = Color(0.560784, 0.752941, 1, 1)
-light_energy = 2.0
-light_bake_mode = 0
 metadata/_edit_lock_ = true

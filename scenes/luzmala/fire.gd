@@ -26,7 +26,7 @@ var is_target_reached := false:
 			target_reached.emit()
 
 @onready var particles = $GPUParticles3D
-@onready var light = $GPUParticles3D/OmniLight3D
+@onready var light = $OmniLight3D
 
 func _physics_process(delta: float) -> void:
 	match current_state:
@@ -65,9 +65,15 @@ func despawn():
 	current_state = State.DESPAWNED
 	particles.emitting = false
 	is_target_reached = false
+	var tween := create_tween()
+	tween.tween_property(light, "omni_range", 0, 0.5)
+	tween.set_ease(Tween.EASE_IN)
+	await tween.finished
 	light.hide()
 
+
 func roam( global_pos : Vector3):
+	light.omni_range = 5.0
 	velocity = Vector3(0.5,0,0)
 	target = get_tree().get_first_node_in_group("luzmala_target")
 	global_position = global_pos
