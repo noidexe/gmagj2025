@@ -18,7 +18,8 @@ func _ready() -> void:
 	for checkpoint in checkpoints:
 		checkpoint.validate(self)
 	_next_checkpoint()
-	ui.fade(0, 4.0)
+	await RenderingServer.frame_post_draw
+	$anims.play("intro")
 
 func _on_fire_state_changed(old: Variant, new: Variant) -> void:
 	match new:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://b78fqcqmlf850"]
+[gd_scene load_steps=81 format=3 uid="uid://b78fqcqmlf850"]
 
 [ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://cijt0tsfkuebm" path="res://scenes/level/level.gd" id="1_xm880"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://dh8fs45jrtopk" path="res://sound/751465__borgory__crickets-chirping-in-the-night-at-the-forest-001.wav" id="16_x4oov"]
 [ext_resource type="PackedScene" uid="uid://chq4j3c4v2783" path="res://models/light_blue_eastpak-like_backpack.glb" id="18_ss4b2"]
 [ext_resource type="PackedScene" uid="uid://dqjsnerwrovob" path="res://scenes/beacon/beacon.tscn" id="18_vfold"]
+[ext_resource type="AudioStream" uid="uid://ucp5v7yvplxm" path="res://sound/567251__iwanplays__stones-falling.wav" id="19_bdmju"]
 [ext_resource type="PackedScene" uid="uid://cj2lkdgtpshke" path="res://models/godot_plush_sitted.glb" id="19_qjqsm"]
 [ext_resource type="PackedScene" uid="uid://bl1hn0hug8tb6" path="res://models/scarf_dior.glb" id="21_3rml5"]
 [ext_resource type="PackedScene" uid="uid://dk1yjpqq8bxmx" path="res://models/tent.glb" id="21_wyi7n"]
@@ -36,6 +37,7 @@
 [ext_resource type="Script" uid="uid://dbo83n5uwcb2q" path="res://scenes/level/debug_map.gd" id="33_mf35j"]
 [ext_resource type="FontFile" uid="uid://cvtjdlwe8ly7" path="res://fonts/Special_Elite/SpecialElite-Regular.ttf" id="34_t51ir"]
 [ext_resource type="PackedScene" uid="uid://cu3724g5fsuiv" path="res://scenes/end/end_ui.tscn" id="36_7lsmv"]
+[ext_resource type="AudioStream" uid="uid://ddo4gmdpre4cc" path="res://sound/514299__futuretechman__body-falling-on-rug.mp3" id="38_uhw4h"]
 
 [sub_resource type="Resource" id="Resource_mf35j"]
 script = ExtResource("2_87pmf")
@@ -91,7 +93,7 @@ size = Vector2(100, 50)
 subdivide_width = 800
 subdivide_depth = 400
 
-[sub_resource type="Resource" id="Resource_7lsmv"]
+[sub_resource type="Resource" id="Resource_d6d7a"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -100,7 +102,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_bdmju"]
+[sub_resource type="Resource" id="Resource_lilx5"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -111,7 +113,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_d6d7a"]
+[sub_resource type="Resource" id="Resource_eipt2"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -127,16 +129,16 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_lilx5"]
+[sub_resource type="Resource" id="Resource_huyqb"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_7lsmv"), SubResource("Resource_bdmju"), SubResource("Resource_d6d7a")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_d6d7a"), SubResource("Resource_lilx5"), SubResource("Resource_eipt2")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 metadata/_custom_type_script = "uid://c002frylejmtn"
 
-[sub_resource type="Resource" id="Resource_eipt2"]
+[sub_resource type="Resource" id="Resource_wfkuu"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(1.2, 1.2, 1)
 enabled = true
@@ -145,7 +147,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_huyqb"]
+[sub_resource type="Resource" id="Resource_2mgdv"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -156,7 +158,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_wfkuu"]
+[sub_resource type="Resource" id="Resource_v0tij"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -172,15 +174,15 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_2mgdv"]
+[sub_resource type="Resource" id="Resource_cumia"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_eipt2"), SubResource("Resource_huyqb"), SubResource("Resource_wfkuu")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_wfkuu"), SubResource("Resource_2mgdv"), SubResource("Resource_v0tij")])
 
 [sub_resource type="Resource" id="Resource_uhw4h"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_v0tij"]
+[sub_resource type="Resource" id="Resource_mrtjf"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -189,7 +191,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_cumia"]
+[sub_resource type="Resource" id="Resource_5fvqx"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -200,7 +202,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_mrtjf"]
+[sub_resource type="Resource" id="Resource_fpwbr"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -216,15 +218,15 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_5fvqx"]
+[sub_resource type="Resource" id="Resource_toxcj"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_v0tij"), SubResource("Resource_cumia"), SubResource("Resource_mrtjf")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_mrtjf"), SubResource("Resource_5fvqx"), SubResource("Resource_fpwbr")])
 
 [sub_resource type="Resource" id="Resource_4u3nd"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_fpwbr"]
+[sub_resource type="Resource" id="Resource_ckgp1"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(5, 0.05, 5)
 enabled = true
@@ -233,7 +235,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_toxcj"]
+[sub_resource type="Resource" id="Resource_u4xsj"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -244,7 +246,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_ckgp1"]
+[sub_resource type="Resource" id="Resource_akdg6"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -260,9 +262,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_u4xsj"]
+[sub_resource type="Resource" id="Resource_1nn6r"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_fpwbr"), SubResource("Resource_toxcj"), SubResource("Resource_ckgp1")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_ckgp1"), SubResource("Resource_u4xsj"), SubResource("Resource_akdg6")])
 
 [sub_resource type="Resource" id="Resource_bhlam"]
 script = ExtResource("9_tuemg")
@@ -332,6 +334,76 @@ font_size = 24
 [sub_resource type="SphereShape3D" id="SphereShape3D_t51ir"]
 radius = 1.80474
 
+[sub_resource type="Animation" id="Animation_d6d7a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ambient:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+
+[sub_resource type="Animation" id="Animation_uhw4h"]
+resource_name = "intro"
+length = 7.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fall")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("19_bdmju")
+}, {
+"end_offset": 0.04,
+"start_offset": 0.0,
+"stream": ExtResource("38_uhw4h")
+}],
+"times": PackedFloat32Array(0, 2.93333)
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5.96667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0, 4.0],
+"method": &"fade"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ambient:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6, 7),
+"transitions": PackedFloat32Array(0, 1, 1),
+"update": 0,
+"values": [-80.0, -80.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d6d7a"]
+_data = {
+&"RESET": SubResource("Animation_d6d7a"),
+&"intro": SubResource("Animation_uhw4h")
+}
+
 [node name="Level" type="Node3D"]
 script = ExtResource("1_xm880")
 checkpoints = Array[ExtResource("2_87pmf")]([SubResource("Resource_mf35j"), SubResource("Resource_87pmf"), SubResource("Resource_eim2y"), SubResource("Resource_gjaaf"), SubResource("Resource_mhi84")])
@@ -358,7 +430,7 @@ mesh = SubResource("PlaneMesh_87pmf")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_lilx5")
+modifier_stack = SubResource("Resource_huyqb")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -379,7 +451,7 @@ shape = SubResource("Resource_s0gvp")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_2mgdv")
+modifier_stack = SubResource("Resource_cumia")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -399,7 +471,7 @@ shape = SubResource("Resource_uhw4h")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_5fvqx")
+modifier_stack = SubResource("Resource_toxcj")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -418,7 +490,7 @@ shape = SubResource("Resource_4u3nd")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_u4xsj")
+modifier_stack = SubResource("Resource_1nn6r")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -465,11 +537,13 @@ environment = SubResource("Environment_6iypd")
 
 [node name="puddle" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.058, -0.452993, -2.243)
+visible = false
 mesh = SubResource("SphereMesh_7lsmv")
 skeleton = NodePath("../fire")
 
 [node name="puddle2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.3696, -0.452993, 23.7741)
+visible = false
 mesh = SubResource("SphereMesh_7lsmv")
 skeleton = NodePath("../fire")
 
@@ -481,6 +555,12 @@ transform = Transform3D(0.636536, 0, -0.771247, 0, 1, 0, 0.771247, 0, 0.636536, 
 
 [node name="ambient" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_x4oov")
+volume_db = -80.0
+autoplay = true
+bus = &"Ambience"
+
+[node name="fall" type="AudioStreamPlayer" parent="."]
+pitch_scale = 1.5
 autoplay = true
 bus = &"Ambience"
 
@@ -505,13 +585,13 @@ transform = Transform3D(-0.990192, -0.0167651, 0.138708, -0.0145433, 0.999749, 0
 fov = 50.7
 
 [node name="beacon_book" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(-0.012313, -0.0927751, 0.0352303, -0.00436664, 0.0359725, 0.0932036, -0.0991429, 0.00993781, -0.00848046, -29.7297, -0.139894, 15.0647)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7297, -0.139894, 15.0647)
 
 [node name="model" parent="beacon_book" instance=ExtResource("23_a5iu8")]
-transform = Transform3D(1, -7.45058e-09, 1.49012e-08, 7.45058e-09, 1, 9.31323e-10, -7.45058e-09, 9.31323e-10, 1, 0, 0, 0)
+transform = Transform3D(-0.012313, -0.0927751, 0.0352303, -0.00436664, 0.0359725, 0.0932036, -0.0991429, 0.00993781, -0.00848046, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_book"]
-transform = Transform3D(-5.17323, -0.818102, 8.51871, 7.91888, 3.31666, 5.12748, -3.24485, 9.39843, -1.06794, 6.18659, 8.0351, -1.95877)
+transform = Transform3D(-0.785294, 0.0334788, -0.618218, 0.00501984, 0.998848, 0.0477148, 0.619103, 0.0343668, -0.784557, -0.89064, 0.0794636, -0.516894)
 fov = 45.0
 
 [node name="beacon_soda_can" parent="." instance=ExtResource("18_vfold")]
@@ -555,15 +635,15 @@ transform = Transform3D(-0.241922, 0.100403, -0.965087, 0, 0.994631, 0.103476, 0
 fov = 54.1
 
 [node name="beacon_starplush" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 9.64819, -0.198826, -20.4503)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.64819, -0.198826, -20.4503)
 
 [node name="model" type="MeshInstance3D" parent="beacon_starplush"]
-transform = Transform3D(-0.814834, 0.239563, 0.527877, 0.0747712, 0.946441, -0.3141, -0.574851, -0.216469, -0.789105, 207.021, 0, -323.426)
+transform = Transform3D(-0.000814834, 0.000239563, 0.000527877, 7.47712e-05, 0.000946441, -0.000314099, -0.000574851, -0.000216469, -0.000789105, 0.207021, 0, -0.323425)
 mesh = ExtResource("27_fhw5o")
 skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="beacon_starplush"]
-transform = Transform3D(-430508, -11815.6, -902509, 0, 999915, -13090.8, 902587, -5635.68, -430471, -567.928, 88.6653, -216.344)
+transform = Transform3D(-0.430508, -0.0118156, -0.90251, 0, 0.999914, -0.0130908, 0.902587, -0.00563569, -0.430471, -0.567928, 0.0886653, -0.216345)
 
 [node name="beacon_tent" parent="." instance=ExtResource("18_vfold")]
 transform = Transform3D(0.983159, 0, 0.18275, 0, 1, 0, -0.18275, 0, 0.983159, 35.9264, -0.792786, -13.7376)
@@ -772,6 +852,11 @@ shape = SubResource("SphereShape3D_t51ir")
 [node name="end_camera" type="Camera3D" parent="."]
 transform = Transform3D(0.991317, 0.0245006, 0.129192, -0.0739276, 0.916356, 0.39348, -0.108745, -0.399614, 0.910211, -44.7637, 1.54869, 23.1549)
 fov = 78.8
+
+[node name="anims" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_d6d7a")
+}
 
 [connection signal="state_changed" from="fire" to="." method="_on_fire_state_changed"]
 [connection signal="target_reached" from="fire" to="." method="_on_fire_target_reached"]
