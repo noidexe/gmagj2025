@@ -541,6 +541,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.3193, 0, 16.0283)
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="DebugMap" type="Sprite2D" parent="UI" node_paths=PackedStringArray("player")]
+visible = false
 position = Vector2(157, 94)
 scale = Vector2(0.325, 0.325)
 texture = ExtResource("3_vfold")

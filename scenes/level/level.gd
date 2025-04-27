@@ -60,3 +60,5 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action("volume_up"):
 		AudioServer.set_bus_volume_linear(0, min(AudioServer.get_bus_volume_linear(0) + 0.1, 2.0))
 		pass
+	elif event.is_action_pressed("show_map"):
+		$UI/DebugMap.visible = !$UI/DebugMap.visible
