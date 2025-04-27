@@ -168,7 +168,7 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0581057, -0.562165)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="head"]
-light_energy = 0.1
+light_energy = 0.2
 spot_range = 2.94
 spot_angle = 60.82
 spot_angle_attenuation = 2.92816
@@ -193,6 +193,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="crosshair" type="TextureRect" parent="HUD/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
