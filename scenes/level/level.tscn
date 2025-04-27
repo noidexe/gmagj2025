@@ -91,7 +91,7 @@ size = Vector2(100, 50)
 subdivide_width = 800
 subdivide_depth = 400
 
-[sub_resource type="Resource" id="Resource_t51ir"]
+[sub_resource type="Resource" id="Resource_7lsmv"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -100,7 +100,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_hfr1v"]
+[sub_resource type="Resource" id="Resource_bdmju"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -111,7 +111,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_7lsmv"]
+[sub_resource type="Resource" id="Resource_d6d7a"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -127,16 +127,16 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_bdmju"]
+[sub_resource type="Resource" id="Resource_lilx5"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_t51ir"), SubResource("Resource_hfr1v"), SubResource("Resource_7lsmv")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_7lsmv"), SubResource("Resource_bdmju"), SubResource("Resource_d6d7a")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 metadata/_custom_type_script = "uid://c002frylejmtn"
 
-[sub_resource type="Resource" id="Resource_d6d7a"]
+[sub_resource type="Resource" id="Resource_eipt2"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(1.2, 1.2, 1)
 enabled = true
@@ -145,7 +145,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_lilx5"]
+[sub_resource type="Resource" id="Resource_huyqb"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -156,7 +156,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_eipt2"]
+[sub_resource type="Resource" id="Resource_wfkuu"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -172,15 +172,15 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_huyqb"]
+[sub_resource type="Resource" id="Resource_2mgdv"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_d6d7a"), SubResource("Resource_lilx5"), SubResource("Resource_eipt2")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_eipt2"), SubResource("Resource_huyqb"), SubResource("Resource_wfkuu")])
 
 [sub_resource type="Resource" id="Resource_uhw4h"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_wfkuu"]
+[sub_resource type="Resource" id="Resource_v0tij"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -189,7 +189,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_2mgdv"]
+[sub_resource type="Resource" id="Resource_cumia"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -200,7 +200,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_v0tij"]
+[sub_resource type="Resource" id="Resource_mrtjf"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -216,9 +216,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_cumia"]
+[sub_resource type="Resource" id="Resource_5fvqx"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_wfkuu"), SubResource("Resource_2mgdv"), SubResource("Resource_v0tij")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_v0tij"), SubResource("Resource_cumia"), SubResource("Resource_mrtjf")])
 
 [sub_resource type="Resource" id="Resource_4u3nd"]
 script = ExtResource("9_tuemg")
@@ -295,13 +295,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
 shape = SubResource("BoxShape3D_vrc4q")
 
 [node name="maze_preview" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("PlaneMesh_87pmf")
 
 [node name="Bushes" type="Node3D" parent="."]
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_bdmju")
+modifier_stack = SubResource("Resource_lilx5")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -322,7 +323,7 @@ shape = SubResource("Resource_s0gvp")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_huyqb")
+modifier_stack = SubResource("Resource_2mgdv")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -342,7 +343,7 @@ shape = SubResource("Resource_uhw4h")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_cumia")
+modifier_stack = SubResource("Resource_5fvqx")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
