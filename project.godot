@@ -13,11 +13,12 @@ config_version=5
 config/name="GMAGJ2025"
 run/main_scene="uid://b78fqcqmlf850"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/image="uid://86ccy4yxmq5g"
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/mode=3
+window/size/mode=4
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
