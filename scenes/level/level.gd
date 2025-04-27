@@ -43,8 +43,7 @@ func _on_fire_target_reached() -> void:
 			player.make_current()
 			await get_tree().create_timer(1.0).timeout
 	luzmala.leave(get_node(current_checkpoint.despawn_point))
-	var tween := create_tween()
-	tween.tween_property($puddle, "position:y", -0.7, 10)
+	$anims.play("heavy_breathing")
 
 func _on_fire_despawned() -> void:
 	await get_tree().create_timer(2.0).timeout
