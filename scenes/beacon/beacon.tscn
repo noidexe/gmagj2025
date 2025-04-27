@@ -12,6 +12,7 @@ script = ExtResource("1_r1fgj")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88964, 0)
 light_color = Color(0.475107, 0.962664, 1, 1)
+shadow_enabled = true
 omni_range = 3.0
 
 [node name="sfx" type="AudioStreamPlayer3D" parent="."]

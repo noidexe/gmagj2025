@@ -294,6 +294,8 @@ sky_material = SubResource("PanoramaSkyMaterial_vfold")
 background_mode = 2
 sky = SubResource("Sky_t51ir")
 tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_cascades = 3
@@ -374,6 +376,34 @@ tracks/2/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_il1ck"]
+resource_name = "heavy_breathing"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("heavy_breathing:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("heavy_breathing:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6.16667, 7.43333),
+"transitions": PackedFloat32Array(1, 30.91, 1),
+"update": 0,
+"values": [0.0, 0.0, -80.0]
+}
+
 [sub_resource type="Animation" id="Animation_uhw4h"]
 resource_name = "intro"
 length = 7.0
@@ -423,34 +453,6 @@ tracks/2/keys = {
 "values": [-80.0, -80.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_il1ck"]
-resource_name = "heavy_breathing"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("heavy_breathing:playing")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("heavy_breathing:volume_db")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 6.16667, 7.43333),
-"transitions": PackedFloat32Array(1, 30.91, 1),
-"update": 0,
-"values": [0.0, 0.0, -80.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d6d7a"]
 _data = {
 &"RESET": SubResource("Animation_d6d7a"),
@@ -474,6 +476,7 @@ mesh = SubResource("PlaneMesh_noarx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+visible = false
 shape = SubResource("BoxShape3D_vrc4q")
 
 [node name="maze_preview" type="MeshInstance3D" parent="."]
@@ -623,7 +626,7 @@ pitch_scale = 1.5
 bus = &"Ambience"
 
 [node name="beacon_ball" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4486, -0.385769, -20.797)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.0586, -0.385769, -20.5366)
 
 [node name="model" parent="beacon_ball" instance=ExtResource("29_xm880")]
 transform = Transform3D(1, 0, 0, 0, 0.9, 0, 0, 0, 1, 0, 0.0327898, 0.019186)
@@ -633,23 +636,23 @@ transform = Transform3D(0.873471, -0.00599637, -0.486839, 0.118113, 0.972664, 0.
 fov = 32.4
 
 [node name="beacon_godot" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4728, -0.441681, -6.21851)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.9227, -0.540155, -6.40463)
 
 [node name="model" parent="beacon_godot" instance=ExtResource("19_qjqsm")]
-transform = Transform3D(0.998236, 0.163807, 1.10756, -7.45058e-09, 1.48386, -0.219461, -1.11961, 0.146049, 0.987494, -0.032808, -0.0126323, -0.0742058)
+transform = Transform3D(0.998236, 0.163807, 1.10756, -7.45058e-09, 1.48386, -0.219461, -1.11961, 0.146049, 0.987494, 0.417072, 0.0858417, 0.111914)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_godot"]
-transform = Transform3D(-0.990192, -0.0167651, 0.138708, -0.0145433, 0.999749, 0.017016, -0.138958, 0.0148318, -0.990187, -0.42288, 0.232521, -1.06161)
+transform = Transform3D(-0.990192, -0.0167651, 0.138707, -0.0145433, 0.999749, 0.017016, -0.138958, 0.0148318, -0.990187, 0.0270004, 0.330995, -0.87549)
 fov = 50.7
 
 [node name="beacon_book" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7297, -0.139894, 15.0647)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.122, -1.805, 15.441)
 
 [node name="model" parent="beacon_book" instance=ExtResource("23_a5iu8")]
-transform = Transform3D(-0.012313, -0.0927751, 0.0352303, -0.00436664, 0.0359725, 0.0932036, -0.0991429, 0.00993781, -0.00848046, 0, 0, 0)
+transform = Transform3D(-0.012313, -0.00265547, 0.0992035, -0.00436664, 0.0998819, 0.00213158, -0.0991429, -0.00406937, -0.0124144, -0.0469627, 1.48699, -0.134619)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_book"]
-transform = Transform3D(-0.785294, 0.0334788, -0.618218, 0.00501984, 0.998848, 0.0477148, 0.619103, 0.0343668, -0.784557, -0.89064, 0.0794636, -0.516894)
+transform = Transform3D(-0.785294, 0.0334788, -0.618217, 0.00501984, 0.998848, 0.0477149, 0.619103, 0.0343668, -0.784558, -0.498341, 1.74457, -0.893194)
 fov = 45.0
 
 [node name="beacon_soda_can" parent="." instance=ExtResource("18_vfold")]
@@ -673,7 +676,7 @@ transform = Transform3D(0.74058, 0.600059, -0.302436, -0.0789762, 0.524683, 0.84
 fov = 38.1
 
 [node name="beacon_box" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.265377, -0.209259, 3.66217)
+transform = Transform3D(0.960118, 0, 0.279594, 0, 1, 0, -0.279594, 0, 0.960118, 0.357717, -0.269408, 4.05785)
 
 [node name="model" parent="beacon_box" instance=ExtResource("22_3rml5")]
 transform = Transform3D(-0.826584, 0.0226879, -0.562356, -0.0234376, 0.996933, 0.0746707, 0.562325, 0.0749019, -0.823517, 0, 0, 0)
@@ -693,24 +696,24 @@ transform = Transform3D(-0.241922, 0.100403, -0.965087, 0, 0.994631, 0.103476, 0
 fov = 54.1
 
 [node name="beacon_starplush" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.64819, -0.198826, -20.4503)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.64819, -0.475589, -20.4503)
 
 [node name="model" type="MeshInstance3D" parent="beacon_starplush"]
-transform = Transform3D(-0.000814834, 0.000239563, 0.000527877, 7.47712e-05, 0.000946441, -0.000314099, -0.000574851, -0.000216469, -0.000789105, 0.207021, 0, -0.323425)
+transform = Transform3D(-0.000814834, 0.000239563, 0.000527877, 7.47712e-05, 0.000946441, -0.000314099, -0.000574851, -0.000216469, -0.000789105, 0.207021, 0.276013, -0.323425)
 mesh = ExtResource("27_fhw5o")
 skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="beacon_starplush"]
-transform = Transform3D(-0.430508, -0.0118156, -0.90251, 0, 0.999914, -0.0130908, 0.902587, -0.00563569, -0.430471, -0.567928, 0.0886653, -0.216345)
+transform = Transform3D(-0.430508, -0.0118156, -0.90251, 0, 0.999914, -0.0130908, 0.902587, -0.0056357, -0.430471, -0.567928, 0.364678, -0.216345)
 
 [node name="beacon_tent" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(0.983159, 0, 0.18275, 0, 1, 0, -0.18275, 0, 0.983159, 35.9264, -0.792786, -13.7376)
+transform = Transform3D(0.983159, 0, 0.18275, 0, 1, 0, -0.18275, 0, 0.983159, 35.9264, -0.824799, -13.7376)
 
 [node name="model" parent="beacon_tent" instance=ExtResource("21_wyi7n")]
-transform = Transform3D(-0.462992, -0.0244506, 0.886025, -0.0574778, 0.998344, -0.00248488, -0.884497, -0.0520772, -0.463631, 0, 0.875396, 0)
+transform = Transform3D(-0.462992, -0.0244506, 0.886025, -0.0574778, 0.998344, -0.00248488, -0.884497, -0.0520772, -0.463631, 0, 0.939797, 0)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_tent"]
-transform = Transform3D(-0.824426, 0.19315, -0.531991, 0, 0.939964, 0.341273, 0.565969, 0.281354, -0.774931, -1.76813, 1.51239, -1.83289)
+transform = Transform3D(-0.824427, 0.19315, -0.531991, 0, 0.939964, 0.341273, 0.56597, 0.281354, -0.774932, -1.76813, 1.57679, -1.83289)
 fov = 100.0
 
 [node name="beacon_backpack" parent="." instance=ExtResource("18_vfold")]
@@ -724,23 +727,23 @@ transform = Transform3D(0.687342, 0.0532509, -0.724379, 0, 0.997309, 0.0733147, 
 fov = 54.2
 
 [node name="beacon_bird" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(0.0420326, 0, 0.999116, 0, 1, 0, -0.999116, 0, 0.0420326, 28.9628, -0.201542, 4.77165)
+transform = Transform3D(0.0420326, 0, 0.999116, 0, 1, 0, -0.999116, 0, 0.0420326, 28.0481, -0.795736, 4.54696)
 
 [node name="model" parent="beacon_bird" instance=ExtResource("28_fhw5o")]
-transform = Transform3D(-0.865982, -0.077022, -0.494109, 0, 0.988068, -0.154021, 0.500076, -0.133379, -0.855649, 0.0512191, 0.115395, -0.0327324)
+transform = Transform3D(-1.75513, -0.154044, -0.946464, -0.00737563, 1.97614, -0.307953, 0.95889, -0.266758, -1.73475, -0.0729921, 0.860657, 0.637247)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_bird"]
-transform = Transform3D(0.420104, -0.133419, 0.897615, 0, 0.989133, 0.147023, -0.907475, -0.0617648, 0.415538, 0.31445, 0.0635105, -0.0392151)
+transform = Transform3D(0.420104, -0.133419, 0.897615, 0, 0.989133, 0.147022, -0.907476, -0.0617647, 0.415539, 0.387429, 0.813603, 0.656851)
 fov = 45.0
 
 [node name="beacon_nahuelito" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.3078, -1.45448, 9.621)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.8709, -1.12304, 9.66977)
 
 [node name="model" parent="beacon_nahuelito" instance=ExtResource("26_u5w0m")]
-transform = Transform3D(-0.485359, 0, -0.874315, 0, 1, 0, 0.874315, 0, -0.485359, 0.188643, 1.11815, -0.264167)
+transform = Transform3D(-0.485359, 0, -0.874315, 0, 1, 0, 0.874315, 0, -0.485359, 0.62558, 0.786709, -0.312936)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_nahuelito"]
-transform = Transform3D(-0.815477, 0.199278, 0.543401, 0.020301, 0.948129, -0.317236, -0.578433, -0.247667, -0.777224, 0.356396, 1.18732, -1.42676)
+transform = Transform3D(-0.841084, 0.199278, 0.502858, 0.0357957, 0.948129, -0.315863, -0.539719, -0.247667, -0.804589, 0.793335, 0.855879, -1.47553)
 fov = 60.0
 
 [node name="vision_sfx" type="AudioStreamPlayer" parent="."]
