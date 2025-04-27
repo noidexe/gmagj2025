@@ -1,0 +1,176 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu3724g5fsuiv"]
+
+[ext_resource type="Script" uid="uid://blem311cov50a" path="res://scenes/end/end_ui.gd" id="1_8j6dv"]
+[ext_resource type="FontFile" uid="uid://cvtjdlwe8ly7" path="res://fonts/Special_Elite/SpecialElite-Regular.ttf" id="2_s81vm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k5hsu"]
+font = ExtResource("2_s81vm")
+font_size = 36
+
+[node name="end_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8j6dv")
+
+[node name="test_bg" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -62.0
+offset_right = 127.0
+offset_bottom = 62.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer"]
+layout_mode = 2
+text = "La Luz
+"
+label_settings = SubResource("LabelSettings_k5hsu")
+
+[node name="play_again" type="Button" parent="MarginContainer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s81vm")
+text = "Volver a Jugar"
+flat = true
+alignment = 0
+
+[node name="quit" type="Button" parent="MarginContainer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s81vm")
+text = "Salir"
+flat = true
+alignment = 0
+
+[node name="credits" type="RichTextLabel" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -502.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_s81vm")
+theme_override_fonts/italics_font = ExtResource("2_s81vm")
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]Creditos:[/center]
+
+[i]Diseño:[/i]
+
+Fernanda Di Zocollo
+
+
+[i]Programación:[/i]
+
+Lisandro Lorea
+
+
+[i]Modelos[/i]
+
+Godot Plush por FR3NKD
+[i][url]https://fr3nkd.gumroad.com/l/vhfvy[/url][/i]
+
+Old soccer ball por outcasto
+[i][url]https://sketchfab.com/3d-models/old-soccer-ball-e38b0fd0db924e948160d611ce5cd93c[/i]
+
+Stuffed Dino Toy por Andrey.Chegodaev
+[i][url]https://sketchfab.com/3d-models/stuffed-dino-toy-d69e9bb7bfc6451993bf84f3e763a28a[/i]
+
+Star Toy por NEXIC
+[i][url]https://sketchfab.com/3d-models/star-soft-toy-35df27fc1ca340608eaeb2b9d35a2f58[/url][/i]
+
+Crow Toy por rynnytry
+[i][url]https://sketchfab.com/3d-models/crow-toy-c6efada51a1d4721b4bee0bdaabdc276[/url][/i]
+
+Medieval Shovel por GetDeadEntertainment
+[i][url]https://sketchfab.com/3d-models/medieval-shovel-3f4bf7244f1c4faa9f5a815eec38eedb[/url][/i]
+
+Wasteland Explorer - Soft Drink Can por modelsharkstudio
+[i][url]https://sketchfab.com/3d-models/wasteland-explorer-soft-drink-can-e1dc6cd9e7dd475ab1eae45819d38755[/url][/i]
+
+Old Book por g.staintecatherine
+[i][url]https://sketchfab.com/3d-models/old-book-f635e9f788854a53ba2b3df034a27d0f[/url][/i]
+
+Cardboard Box por Dmitriy Korotkov
+[i][url]https://sketchfab.com/3d-models/cardboard-box-c4e96709c1c9469bace0dceec55ae608[/url][/i]
+
+Scarf Dior por vmmaniac
+[i][url]https://sketchfab.com/3d-models/scarf-dior-59b44a00c1104feda494f9f75c0e3250[/url][/i]
+
+Light Blue Eastpak-like backpack por Jungle Jim
+[i][url]https://sketchfab.com/3d-models/light-blue-eastpak-like-backpack-9d36b64828b145f7bce0ba9b9b8bb740[/url][/i]
+
+
+[i]Sonidos:[/i]
+
+Stones Falling por iwanPlays
+[i][url]https://freesound.org/people/iwanPlays/sounds/567251/[/url][/i]
+
+Hand Bells, G, single.wav por InspectorJ
+[i][url]https://freesound.org/people/InspectorJ/sounds/339818/[/url][/i]
+
+Crickets chirping in the Night at the Forest 001 por Borgory
+[i][url]https://freesound.org/people/Borgory/sounds/751465/[/url][/i]
+
+
+[i]Otros assets: [/i]
+
+Styluzed Fire 3D por GDQuest
+[i][url]https://godotshaders.com/shader/stylized-fire-3d/[/url][/i]
+
+ProtonScatter por HungryProtton
+[i][url]https://github.com/HungryProton/scatter[/url][/i]
+
+Tipografia \"Special Elite\" por Astigmatic
+[i][url]https://fonts.google.com/specimen/Special+Elite[/url][/i]
+
+Forest Leaves 02 por Rob Tuyel
+[i][url]https://polyhaven.com/a/forest_leaves_02[/url][/i]
+
+Miramar Skybox por Jockum Skoglund (hipshot)
+[i][url]https://opengameart.org/content/miramar-skybox[/url][/i]
+
+[i]Godot Engine:[i]
+Copyright (c) 2014-present Godot Engine contributors.
+Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
+[i][url]https://godotengine.org[/url][/i]"
+
+[connection signal="pressed" from="MarginContainer/Control/VBoxContainer/play_again" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="MarginContainer/Control/VBoxContainer/quit" to="." method="_on_quit_pressed"]
+[connection signal="meta_clicked" from="MarginContainer/Control/credits" to="." method="_on_credits_meta_clicked"]

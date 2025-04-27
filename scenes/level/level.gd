@@ -2,11 +2,15 @@ extends Node3D
 
 @onready var player : Player = $player
 @onready var luzmala : LuzMala = $fire
+@onready var ui : UI = $UI
 
 @onready var worldenvironment : WorldEnvironment = $WorldEnvironment
 
 @export var checkpoints : Array[Checkpoint] = []
 var current_checkpoint : Checkpoint
+
+var debug_mode := false
+@onready var _player_initial_sprint_speed = player.sprint_speed
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -14,6 +18,7 @@ func _ready() -> void:
 	for checkpoint in checkpoints:
 		checkpoint.validate(self)
 	_next_checkpoint()
+	ui.fade(0, 4.0)
 
 func _on_fire_state_changed(old: Variant, new: Variant) -> void:
 	match new:
@@ -26,7 +31,7 @@ func _on_fire_state_changed(old: Variant, new: Variant) -> void:
 
 
 func _on_fire_target_reached() -> void:
-	if not current_checkpoint.beacons.is_empty():
+	if not debug_mode and not current_checkpoint.beacons.is_empty():
 		for i in current_checkpoint.beacons.size():
 			var beacon : Beacon = get_node(current_checkpoint.beacons[i])
 			print("target reached")
@@ -62,5 +67,21 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action("volume_up"):
 		AudioServer.set_bus_volume_linear(0, min(AudioServer.get_bus_volume_linear(0) + 0.1, 2.0))
 		pass
-	elif event.is_action_pressed("show_map"):
-		$UI/DebugMap.visible = !$UI/DebugMap.visible
+	elif event.is_action_pressed("debug_toggle"):
+		debug_mode = !debug_mode
+		player.sprint_speed = 8.0 if debug_mode else _player_initial_sprint_speed
+		ui.show_map(debug_mode)
+	elif debug_mode and event.is_pressed() and event is InputEventKey:
+		var key_event : InputEventKey = event as InputEventKey
+		var unicode := String.chr(key_event.unicode)
+		if unicode.is_valid_int() and int(unicode) < checkpoints.size():
+			player.global_position = get_node(checkpoints[int(unicode)].spawn_point).global_position
+
+func _on_end_trigger_body_entered(body: Node3D) -> void:
+	await ui.fade(1, 3.0).finished
+	player.enabled = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	$Sun.light_energy = 1.0
+	$end_camera.make_current()
+	ui.show_end_ui()
+	ui.fade(0, 1.0)

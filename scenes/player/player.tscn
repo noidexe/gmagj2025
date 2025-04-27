@@ -150,6 +150,7 @@ stream_5/stream = ExtResource("8_gx1jg")
 [node name="player" type="CharacterBody3D"]
 safe_margin = 0.01
 script = ExtResource("1_u1w3t")
+sprint_speed = 1.2
 jump_velocity = 0.0
 joy_sensitivity = 2.5
 
