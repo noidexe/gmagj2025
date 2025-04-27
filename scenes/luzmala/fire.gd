@@ -4,7 +4,7 @@ class_name LuzMala
 signal state_changed(old, new)
 signal target_reached()
 
-enum State { ROAM, FOLLOW, LEAVE }
+enum State { INIT, ROAM, FOLLOW, LEAVE, DESPAWNED }
 var current_state : State = State.ROAM:
 	set(new_state):
 		var old_state = current_state
@@ -26,14 +26,6 @@ var is_target_reached := false:
 @onready var particles = $GPUParticles3D
 @onready var light = $GPUParticles3D/OmniLight3D
 
-
-func _ready() -> void:
-	set_physics_process(false)
-	while target == null:
-		await get_tree().process_frame
-		target = get_tree().get_first_node_in_group("luzmala_target")
-	set_physics_process(true)
-
 func _physics_process(delta: float) -> void:
 	match current_state:
 		State.ROAM:
@@ -46,6 +38,10 @@ func _physics_process(delta: float) -> void:
 			if not is_target_reached and global_position.distance_squared_to(target.global_position) <= 0.01:
 				is_target_reached = true
 		State.LEAVE:
+			global_position = global_position.lerp(target.global_position, 1 - 0.5 ** delta)
+			if global_position.distance_squared_to(target.global_position) <= 0.01:
+				despawn()
+		State.DESPAWNED, State.INIT:
 			pass
 
 
@@ -54,25 +50,23 @@ func follow():
 	light.show()
 	current_state = State.FOLLOW
 
-func leave():
+func leave( despawn_point : Node3D):
+	is_target_reached = false
+	target = despawn_point
 	current_state = State.LEAVE
+	
+
+func despawn():
+	current_state = State.DESPAWNED
 	particles.emitting = false
 	is_target_reached = false
 	light.hide()
 
-func roam():
-	current_state = State.ROAM
+func roam( global_pos : Vector3):
+	target = get_tree().get_first_node_in_group("luzmala_target")
+	global_position = global_pos
+	position.y = 0.6
 	particles.emitting = true
 	is_target_reached = false
 	light.show()
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		var key_event : InputEventKey = event as InputEventKey
-		match key_event.physical_keycode:
-			KEY_KP_0:
-				roam()
-			KEY_KP_1:
-				follow()
-			KEY_KP_2:
-				leave()
+	current_state = State.ROAM

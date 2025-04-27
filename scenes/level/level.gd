@@ -5,19 +5,15 @@ extends Node3D
 
 @onready var worldenvironment : WorldEnvironment = $WorldEnvironment
 
-@export var beacons : Array[Beacon] = []
-@export var beacons_per_vision : Array[int] = []
-@export var firespawnpoints : Array[Marker3D] = []
+@export var checkpoints : Array[Checkpoint] = []
+var current_checkpoint : Checkpoint
 
 func _ready() -> void:
-	assert(firespawnpoints.size() == beacons_per_vision.size())
-	assert( (func() -> bool:
-			var count = 0
-			for beacons in beacons_per_vision:
-				count += beacons
-			return count == beacons.size()).call()
-		)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	$maze_preview.queue_free()
+	for checkpoint in checkpoints:
+		checkpoint.validate(self)
+	_next_checkpoint()
 
 func _on_fire_state_changed(old: Variant, new: Variant) -> void:
 	match new:
@@ -25,29 +21,32 @@ func _on_fire_state_changed(old: Variant, new: Variant) -> void:
 			player.freeze()
 		LuzMala.State.LEAVE:
 			player.unfreeze()
+		LuzMala.State.DESPAWNED:
+			_on_fire_despawned()
 
 
 func _on_fire_target_reached() -> void:
-	if beacons_per_vision.is_empty():
+	if not current_checkpoint.beacons.is_empty():
+		for i in current_checkpoint.beacons.size():
+			var beacon : Beacon = get_node(current_checkpoint.beacons[i])
+			print("target reached")
+			$vision_sfx.play()
+			beacon.focus()
+			await get_tree().create_timer(2.0).timeout
+			beacon.unfocus()
+			player.make_current()
+			await get_tree().create_timer(1.0).timeout
+	luzmala.leave(get_node(current_checkpoint.despawn_point))
+
+func _on_fire_despawned() -> void:
+	await get_tree().create_timer(2.0).timeout
+	_next_checkpoint()
+
+func _next_checkpoint():
+	if checkpoints.is_empty():
 		return
-	var total_beacons : int = beacons_per_vision.pop_front()
-	if beacons.size() < total_beacons:
-		return
-	for i in total_beacons:
-		var beacon : Beacon = beacons.pop_front()
-		print("target reached")
-		$vision_sfx.play()
-		beacon.focus()
-		await get_tree().create_timer(2.0).timeout
-		beacon.unfocus()
-		player.make_current()
-		await get_tree().create_timer(1.0).timeout
-	luzmala.leave()
-	var next_spawn : Marker3D = firespawnpoints.pop_front()
-	luzmala.global_position = next_spawn.global_position
-	luzmala.position.y = 0.6
-	await get_tree().create_timer(1.0).timeout
-	luzmala.roam()
+	current_checkpoint = checkpoints.pop_front()
+	luzmala.roam(get_node(current_checkpoint.spawn_point).global_position)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("exposure_up"):
