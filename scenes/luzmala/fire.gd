@@ -14,6 +14,8 @@ var current_state : State = State.ROAM:
 
 var velocity := Vector3(0.5,0,0)
 
+var start_point : Vector3
+var distance_sq_to_despawn : float
 var target : Node3D = null
 var is_target_reached := false:
 	set(v):
@@ -38,8 +40,8 @@ func _physics_process(delta: float) -> void:
 			if not is_target_reached and global_position.distance_squared_to(target.global_position) <= 0.01:
 				is_target_reached = true
 		State.LEAVE:
-			global_position = global_position.lerp(target.global_position, 1 - 0.5 ** delta)
-			if global_position.distance_squared_to(target.global_position) <= 0.01:
+			position += velocity * delta
+			if global_position.distance_squared_to(start_point) > distance_sq_to_despawn:
 				despawn()
 		State.DESPAWNED, State.INIT:
 			pass
@@ -52,7 +54,10 @@ func follow():
 
 func leave( despawn_point : Node3D):
 	is_target_reached = false
-	target = despawn_point
+	start_point = global_position
+	var end_point = despawn_point.global_position
+	velocity = global_position.direction_to(end_point) * 1.0
+	distance_sq_to_despawn = global_position.distance_squared_to(end_point)
 	current_state = State.LEAVE
 	
 
@@ -63,6 +68,7 @@ func despawn():
 	light.hide()
 
 func roam( global_pos : Vector3):
+	velocity = Vector3(0.5,0,0)
 	target = get_tree().get_first_node_in_group("luzmala_target")
 	global_position = global_pos
 	position.y = 0.6
