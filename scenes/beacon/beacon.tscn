@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqjsnerwrovob"]
+[gd_scene load_steps=4 format=3 uid="uid://dqjsnerwrovob"]
 
 [ext_resource type="Script" uid="uid://k45yy600c2xi" path="res://scenes/beacon/beacon.gd" id="1_r1fgj"]
+[ext_resource type="AudioStream" uid="uid://bww1gdwmhssx6" path="res://sound/571486__kagateni__item-found-2.mp3" id="2_whf3v"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_whf3v"]
+radius = 2.0
 
 [node name="beacon" type="Marker3D"]
 script = ExtResource("1_r1fgj")
@@ -9,3 +13,15 @@ script = ExtResource("1_r1fgj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88964, 0)
 light_color = Color(0.475107, 0.962664, 1, 1)
 omni_range = 3.0
+
+[node name="sfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_whf3v")
+
+[node name="trigger" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="trigger"]
+shape = SubResource("SphereShape3D_whf3v")
+
+[connection signal="body_entered" from="trigger" to="." method="_on_trigger_body_entered" flags=6]
