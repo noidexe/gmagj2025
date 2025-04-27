@@ -66,7 +66,7 @@ func despawn():
 	particles.emitting = false
 	is_target_reached = false
 	var tween := create_tween()
-	tween.tween_property(light, "omni_range", 0, 0.5)
+	tween.tween_property(light, "omni_range", 0, 1.0)
 	tween.set_ease(Tween.EASE_IN)
 	await tween.finished
 	light.hide()
