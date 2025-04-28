@@ -19,6 +19,7 @@ func _ready() -> void:
 	$maze_preview.queue_free()
 	for checkpoint in checkpoints:
 		checkpoint.validate(self)
+	checkpoints.make_read_only()
 	_next_checkpoint()
 	await RenderingServer.frame_post_draw
 	$anims.play("intro")
