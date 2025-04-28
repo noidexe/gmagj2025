@@ -578,10 +578,11 @@ script = ExtResource("8_tcnuu")
 shape = SubResource("Resource_qafrb")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.863285, 0.243078, -0.442326, 0.498094, -0.268799, 0.824409, 0.0814991, -0.932019, -0.353126, -3.60171, 38.2331, 2.43836)
-light_color = Color(0.819608, 0.929412, 1, 1)
-light_energy = 0.01
-light_volumetric_fog_energy = 2.8
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 0.999999, 0, -1, -4.37114e-08, -3.60171, 38.2331, 2.43836)
+light_color = Color(0.618145, 0.622999, 1, 1)
+light_energy = 0.03
+light_indirect_energy = 3.0
+light_volumetric_fog_energy = 10.0
 light_bake_mode = 1
 shadow_enabled = true
 directional_shadow_mode = 1
