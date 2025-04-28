@@ -7,7 +7,9 @@ extends Node3D
 @onready var worldenvironment : WorldEnvironment = $WorldEnvironment
 
 @export var checkpoints : Array[Checkpoint] = []
+var cur_cp_idx : int = -1
 var current_checkpoint : Checkpoint
+
 
 var debug_mode := false
 @onready var _player_initial_sprint_speed = player.sprint_speed
@@ -50,9 +52,10 @@ func _on_fire_despawned() -> void:
 	_next_checkpoint()
 
 func _next_checkpoint():
-	if checkpoints.is_empty():
+	cur_cp_idx += 1
+	if cur_cp_idx < 0 or cur_cp_idx >= checkpoints.size():
 		return
-	current_checkpoint = checkpoints.pop_front()
+	current_checkpoint = checkpoints[cur_cp_idx]
 	luzmala.roam(get_node(current_checkpoint.spawn_point).global_position)
 
 func _input(event: InputEvent) -> void:
