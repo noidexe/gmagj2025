@@ -46,8 +46,8 @@ void vertex() {
 	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
 	uv1_power_normal /= dot(uv1_power_normal, vec3(1.0));
 	uv1_triplanar_pos *= vec3(1.0, -1.0, 1.0);
-	
-	VERTEX.y += -0.5 + 2.0 * texture(texture_height, UV).r * height_ratio; 
+
+	VERTEX.y += -0.5 + 2.0 * texture(texture_height, UV).r * height_ratio;
 }
 
 vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {

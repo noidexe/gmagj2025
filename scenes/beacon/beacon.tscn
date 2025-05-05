@@ -4,13 +4,14 @@
 [ext_resource type="AudioStream" uid="uid://bww1gdwmhssx6" path="res://sound/571486__kagateni__item-found-2.mp3" id="2_whf3v"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_whf3v"]
-radius = 2.0
+radius = 3.0
 
 [node name="beacon" type="Marker3D"]
 script = ExtResource("1_r1fgj")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88964, 0)
+visible = false
 light_color = Color(0.475107, 0.962664, 1, 1)
 shadow_enabled = true
 omni_range = 3.0
@@ -24,5 +25,10 @@ collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="trigger"]
 shape = SubResource("SphereShape3D_whf3v")
+debug_color = Color(1, 0, 0.0194855, 1)
 
-[connection signal="body_entered" from="trigger" to="." method="_on_trigger_body_entered" flags=6]
+[node name="backoff" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="trigger" to="." method="_on_trigger_body_entered"]
