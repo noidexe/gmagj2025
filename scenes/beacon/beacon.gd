@@ -1,4 +1,3 @@
-@tool
 extends Marker3D
 class_name Beacon
 
@@ -12,6 +11,7 @@ func _ready() -> void:
 		assert(get_node_or_null("model"))
 	if get_node_or_null("model"):
 		$trigger.global_position = get_node("model").global_position
+		$sfx.global_position = $trigger.global_position
 
 func focus():
 	(get_node("Camera3D") as Camera3D).make_current()
