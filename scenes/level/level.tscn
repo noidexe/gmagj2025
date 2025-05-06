@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://b78fqcqmlf850"]
+[gd_scene load_steps=91 format=3 uid="uid://b78fqcqmlf850"]
 
 [ext_resource type="Script" uid="uid://02gx6556epcx" path="res://addons/proton_scatter/src/scatter.gd" id="1_4arys"]
 [ext_resource type="Script" uid="uid://cijt0tsfkuebm" path="res://scenes/level/level.gd" id="1_xm880"]
@@ -32,39 +32,43 @@
 [ext_resource type="PackedScene" uid="uid://d2rq71dgmylqo" path="res://models/stuffed_dino_toy.glb" id="26_u5w0m"]
 [ext_resource type="ArrayMesh" uid="uid://dr7xd0r2k613m" path="res://models/star_plush.res" id="27_fhw5o"]
 [ext_resource type="PackedScene" uid="uid://d0kxag4xbvw8b" path="res://models/crow_toy.glb" id="28_fhw5o"]
+[ext_resource type="PackedScene" uid="uid://dgjcs2ldkx3kh" path="res://models/bucket.glb" id="29_lilx5"]
 [ext_resource type="PackedScene" uid="uid://d07frwr2k71m" path="res://models/old_soccer_ball.glb" id="29_xm880"]
 [ext_resource type="AudioStream" uid="uid://y2hw2hdpuvuh" path="res://sound/339818__inspectorj__hand-bells-g-single.wav" id="31_r732y"]
 [ext_resource type="Script" uid="uid://c35bsmt8876kq" path="res://scenes/level/ui.gd" id="33_hfr1v"]
 [ext_resource type="Script" uid="uid://dbo83n5uwcb2q" path="res://scenes/level/debug_map.gd" id="33_mf35j"]
 [ext_resource type="FontFile" uid="uid://cvtjdlwe8ly7" path="res://fonts/Special_Elite/SpecialElite-Regular.ttf" id="34_t51ir"]
+[ext_resource type="PackedScene" uid="uid://cwrmq88u1olfq" path="res://models/firepit.glb" id="34_wfkuu"]
+[ext_resource type="PackedScene" uid="uid://dytfsonkwa6it" path="res://models/old_tires_-_dirt_low_poly.glb" id="36_4u3nd"]
 [ext_resource type="PackedScene" uid="uid://cu3724g5fsuiv" path="res://scenes/end/end_ui.tscn" id="36_7lsmv"]
 [ext_resource type="AudioStream" uid="uid://ddo4gmdpre4cc" path="res://sound/514299__futuretechman__body-falling-on-rug.mp3" id="38_uhw4h"]
 [ext_resource type="VoxelGIData" uid="uid://c8qriy6awil6f" path="res://scenes/level/level.VoxelGI_data.res" id="40_lilx5"]
+[ext_resource type="PackedScene" uid="uid://dttdfvg65hpk4" path="res://models/chair_low-poly.glb" id="42_huyqb"]
 
 [sub_resource type="Resource" id="Resource_mf35j"]
 script = ExtResource("2_87pmf")
-beacons = Array[NodePath]([NodePath("beacon_ball"), NodePath("beacon_godot"), NodePath("beacon_book"), NodePath("beacon_soda_can")])
+beacons = Array[NodePath]([NodePath("beacon_ball"), NodePath("beacon_godot"), NodePath("beacon_book")])
 spawn_point = NodePath("spawn1")
 despawn_point = NodePath("despawn1")
 metadata/_custom_type_script = "uid://byn8n2xw8wiwm"
 
 [sub_resource type="Resource" id="Resource_87pmf"]
 script = ExtResource("2_87pmf")
-beacons = Array[NodePath]([NodePath("beacon_shovel"), NodePath("beacon_box")])
+beacons = Array[NodePath]([NodePath("beacon_soda_can"), NodePath("beacon_shovel"), NodePath("beacon_box")])
 spawn_point = NodePath("spawn2")
 despawn_point = NodePath("despawn2")
 metadata/_custom_type_script = "uid://byn8n2xw8wiwm"
 
 [sub_resource type="Resource" id="Resource_eim2y"]
 script = ExtResource("2_87pmf")
-beacons = Array[NodePath]([NodePath("beacon_handkerchief"), NodePath("beacon_starplush")])
+beacons = Array[NodePath]([NodePath("beacon_handkerchief"), NodePath("beacon_starplush"), NodePath("beacon_bucket")])
 spawn_point = NodePath("spawn3")
 despawn_point = NodePath("despawn3")
 metadata/_custom_type_script = "uid://byn8n2xw8wiwm"
 
 [sub_resource type="Resource" id="Resource_gjaaf"]
 script = ExtResource("2_87pmf")
-beacons = Array[NodePath]([NodePath("beacon_tent"), NodePath("beacon_backpack"), NodePath("beacon_bird"), NodePath("beacon_nahuelito")])
+beacons = Array[NodePath]([NodePath("beacon_backpack"), NodePath("beacon_bird"), NodePath("beacon_nahuelito")])
 spawn_point = NodePath("spawn4")
 despawn_point = NodePath("despawn4")
 metadata/_custom_type_script = "uid://byn8n2xw8wiwm"
@@ -83,7 +87,7 @@ subdivide_width = 800
 subdivide_depth = 400
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrc4q"]
-size = Vector3(100, 1, 50)
+size = Vector3(110, 1, 60)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r732y"]
 shading_mode = 0
@@ -95,7 +99,7 @@ size = Vector2(100, 50)
 subdivide_width = 800
 subdivide_depth = 400
 
-[sub_resource type="Resource" id="Resource_lilx5"]
+[sub_resource type="Resource" id="Resource_wfkuu"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -104,7 +108,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_eipt2"]
+[sub_resource type="Resource" id="Resource_2mgdv"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -115,7 +119,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_huyqb"]
+[sub_resource type="Resource" id="Resource_v0tij"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -131,16 +135,16 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_wfkuu"]
+[sub_resource type="Resource" id="Resource_cumia"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_lilx5"), SubResource("Resource_eipt2"), SubResource("Resource_huyqb")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_wfkuu"), SubResource("Resource_2mgdv"), SubResource("Resource_v0tij")])
 
 [sub_resource type="Resource" id="Resource_s0gvp"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 metadata/_custom_type_script = "uid://c002frylejmtn"
 
-[sub_resource type="Resource" id="Resource_2mgdv"]
+[sub_resource type="Resource" id="Resource_mrtjf"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(1.2, 1.2, 1)
 enabled = true
@@ -149,7 +153,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_v0tij"]
+[sub_resource type="Resource" id="Resource_5fvqx"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -160,7 +164,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_cumia"]
+[sub_resource type="Resource" id="Resource_fpwbr"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -176,15 +180,15 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_mrtjf"]
+[sub_resource type="Resource" id="Resource_toxcj"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_2mgdv"), SubResource("Resource_v0tij"), SubResource("Resource_cumia")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_mrtjf"), SubResource("Resource_5fvqx"), SubResource("Resource_fpwbr")])
 
 [sub_resource type="Resource" id="Resource_uhw4h"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_5fvqx"]
+[sub_resource type="Resource" id="Resource_ckgp1"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(0.8, 0.8, 1)
 enabled = true
@@ -193,7 +197,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_fpwbr"]
+[sub_resource type="Resource" id="Resource_u4xsj"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -204,7 +208,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_toxcj"]
+[sub_resource type="Resource" id="Resource_akdg6"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -220,15 +224,15 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_ckgp1"]
+[sub_resource type="Resource" id="Resource_1nn6r"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_5fvqx"), SubResource("Resource_fpwbr"), SubResource("Resource_toxcj")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_ckgp1"), SubResource("Resource_u4xsj"), SubResource("Resource_akdg6")])
 
 [sub_resource type="Resource" id="Resource_4u3nd"]
 script = ExtResource("9_tuemg")
 size = Vector3(100, 1, 50)
 
-[sub_resource type="Resource" id="Resource_u4xsj"]
+[sub_resource type="Resource" id="Resource_b3gir"]
 script = ExtResource("4_cdqbm")
 spacing = Vector3(5, 0.05, 5)
 enabled = true
@@ -237,7 +241,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_akdg6"]
+[sub_resource type="Resource" id="Resource_il1ck"]
 script = ExtResource("5_imku0")
 position = Vector3(0, 0, 0)
 rotation = Vector3(10, 360, 10)
@@ -248,7 +252,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_1nn6r"]
+[sub_resource type="Resource" id="Resource_piek4"]
 script = ExtResource("8_imku0")
 mask = "res://textures/base_maze.png"
 mask_rotation = 0.0
@@ -264,9 +268,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_b3gir"]
+[sub_resource type="Resource" id="Resource_gox8e"]
 script = ExtResource("2_6iypd")
-stack = Array[ExtResource("3_tereu")]([SubResource("Resource_u4xsj"), SubResource("Resource_akdg6"), SubResource("Resource_1nn6r")])
+stack = Array[ExtResource("3_tereu")]([SubResource("Resource_b3gir"), SubResource("Resource_il1ck"), SubResource("Resource_piek4")])
 
 [sub_resource type="Resource" id="Resource_bhlam"]
 script = ExtResource("9_tuemg")
@@ -326,6 +330,15 @@ material = ExtResource("16_7lsmv")
 radius = 5.0
 height = 0.2
 is_hemisphere = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eipt2"]
+size = Vector3(1.64905, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_huyqb"]
+size = Vector3(0.904175, 1.08118, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wfkuu"]
+size = Vector3(1, 1.63062, 1.92566)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hfr1v"]
 font = ExtResource("34_t51ir")
@@ -488,7 +501,7 @@ mesh = SubResource("PlaneMesh_87pmf")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_wfkuu")
+modifier_stack = SubResource("Resource_cumia")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -509,7 +522,7 @@ shape = SubResource("Resource_s0gvp")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_mrtjf")
+modifier_stack = SubResource("Resource_toxcj")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -529,7 +542,7 @@ shape = SubResource("Resource_uhw4h")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_ckgp1")
+modifier_stack = SubResource("Resource_1nn6r")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -548,7 +561,7 @@ shape = SubResource("Resource_4u3nd")
 script = ExtResource("1_4arys")
 global_seed = 3
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_b3gir")
+modifier_stack = SubResource("Resource_gox8e")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -648,23 +661,29 @@ transform = Transform3D(-0.990192, -0.0167651, 0.138707, -0.0145433, 0.999749, 0
 fov = 50.7
 
 [node name="beacon_book" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.122, -1.805, 15.441)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.0872, -0.336712, 8.82392)
 
 [node name="model" parent="beacon_book" instance=ExtResource("23_a5iu8")]
-transform = Transform3D(-0.012313, -0.00265547, 0.0992035, -0.00436664, 0.0998819, 0.00213158, -0.0991429, -0.00406937, -0.0124144, -0.0469627, 1.48699, -0.134619)
+transform = Transform3D(-0.024626, -0.00531094, 0.198407, -0.00873328, 0.199764, 0.0042633, -0.198286, -0.00813879, -0.0248288, -0.0469627, -0.0177971, -0.134619)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_book"]
-transform = Transform3D(-0.785294, 0.0334788, -0.618217, 0.00501984, 0.998848, 0.0477149, 0.619103, 0.0343668, -0.784558, -0.498341, 1.74457, -0.893194)
+transform = Transform3D(-0.982858, 0.0334788, -0.181299, 0.0266662, 0.998848, 0.0398851, 0.182426, 0.0343668, -0.982619, -0.498341, 0.157799, -0.893194)
 fov = 45.0
 
 [node name="beacon_soda_can" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8438, -0.23724, 8.25857)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5834, -0.370416, 2.28472)
 
 [node name="model" parent="beacon_soda_can" instance=ExtResource("24_b3up8")]
 transform = Transform3D(0.284076, 0.257493, -0.923579, 0.0315403, 0.960233, 0.277413, 0.958283, -0.107936, 0.264657, 0, 0, 0)
 
+[node name="model2" parent="beacon_soda_can" instance=ExtResource("24_b3up8")]
+transform = Transform3D(-0.742202, 0.208395, -0.636951, 0.0315403, 0.960233, 0.277413, 0.669434, 0.185807, -0.71926, 0.574456, 0.0143626, 0.172316)
+
+[node name="model3" parent="beacon_soda_can" instance=ExtResource("24_b3up8")]
+transform = Transform3D(-0.742202, 0.208395, -0.636951, 0.0315403, 0.960233, 0.277413, 0.669434, 0.185807, -0.71926, 0.311712, 0.0143626, 0.610409)
+
 [node name="Camera3D" type="Camera3D" parent="beacon_soda_can"]
-transform = Transform3D(0.67559, 0.00262977, -0.737273, 0, 0.999994, 0.00356686, 0.737278, -0.00240973, 0.675586, -0.0766762, 0.0273303, 0.139678)
+transform = Transform3D(-0.325235, 0.00262977, -0.94563, 0.00313403, 0.999994, 0.00170306, 0.945628, -0.00240973, -0.32524, -0.386803, 0.0957155, 0.0327879)
 fov = 50.0
 
 [node name="beacon_shovel" parent="." instance=ExtResource("18_vfold")]
@@ -698,38 +717,38 @@ transform = Transform3D(-0.241922, 0.100403, -0.965087, 0, 0.994631, 0.103476, 0
 fov = 54.1
 
 [node name="beacon_starplush" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.64819, -0.475589, -20.4503)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9492, -0.475589, -16.9689)
 
 [node name="model" type="MeshInstance3D" parent="beacon_starplush"]
-transform = Transform3D(-0.000814834, 0.000239563, 0.000527877, 7.47712e-05, 0.000946441, -0.000314099, -0.000574851, -0.000216469, -0.000789105, 0.207021, 0.276013, -0.323425)
+transform = Transform3D(3.78506e-05, 0.000312061, 0.000949308, 7.47712e-05, 0.000946441, -0.000314099, -0.000996481, 8.28699e-05, 1.24902e-05, -0.0496254, 0.276013, -0.0805912)
 mesh = ExtResource("27_fhw5o")
 skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="beacon_starplush"]
-transform = Transform3D(-0.430508, -0.0118156, -0.90251, 0, 0.999914, -0.0130908, 0.902587, -0.0056357, -0.430471, -0.567928, 0.364678, -0.216345)
+transform = Transform3D(0.479828, -0.0114854, -0.877287, -4.14723e-10, 0.999914, -0.0130908, 0.877362, 0.00628136, 0.479788, -0.56588, 0.328883, -0.10364)
 
-[node name="beacon_tent" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(0.983159, 0, 0.18275, 0, 1, 0, -0.18275, 0, 0.983159, 35.9264, -0.824799, -13.7376)
+[node name="beacon_bucket" parent="." instance=ExtResource("18_vfold")]
+transform = Transform3D(0.983159, 0, 0.18275, 0, 1, 0, -0.18275, 0, 0.983159, 36.0896, -1.76701, -13.4057)
 
-[node name="model" parent="beacon_tent" instance=ExtResource("21_wyi7n")]
-transform = Transform3D(-0.462992, -0.0244506, 0.886025, -0.0574778, 0.998344, -0.00248488, -0.884497, -0.0520772, -0.463631, 0, 0.939797, 0)
+[node name="model" parent="beacon_bucket" instance=ExtResource("29_lilx5")]
+transform = Transform3D(-0.0918541, 0.030732, 0.174981, 0.0264441, 0.197156, -0.020745, -0.17568, 0.0136085, -0.0946112, 0.315441, 1.45058, -0.0600581)
 
-[node name="Camera3D" type="Camera3D" parent="beacon_tent"]
-transform = Transform3D(-0.824427, 0.19315, -0.531991, 0, 0.939964, 0.341273, 0.56597, 0.281354, -0.774932, -1.76813, 1.57679, -1.83289)
+[node name="Camera3D" type="Camera3D" parent="beacon_bucket"]
+transform = Transform3D(-0.216952, 0.686696, -0.693817, 0, 0.710745, 0.70345, 0.976183, 0.152615, -0.154198, -0.4091, 2.34242, -0.191469)
 fov = 100.0
 
 [node name="beacon_backpack" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(-0.959658, 0, -0.281169, 0, 1, 0, 0.281169, 0, -0.959658, 26.4785, 0.0786873, -4.47053)
+transform = Transform3D(0.519728, 0, -0.854332, 0, 1, 0, 0.854332, 0, 0.519728, 28.3291, -1.47127, 2.38632)
 
 [node name="model" parent="beacon_backpack" instance=ExtResource("18_ss4b2")]
-transform = Transform3D(-0.414799, 0.433584, -0.799966, 0.427578, 0.868935, 0.249259, 0.803194, -0.238656, -0.545824, 0.374897, -0.184463, -0.159483)
+transform = Transform3D(-0.414799, 0.433584, -0.799966, 0.427578, 0.868935, 0.249259, 0.803194, -0.238656, -0.545824, 0.650167, 1.36549, -0.367632)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_backpack"]
-transform = Transform3D(0.687342, 0.0532509, -0.724379, 0, 0.997309, 0.0733147, 0.726334, -0.0503923, 0.685493, -0.495697, -0.00464398, 0.107081)
+transform = Transform3D(0.376597, 0.067917, -0.923884, 2.12478e-09, 0.997309, 0.0733147, 0.926377, -0.0276101, 0.375584, -0.220428, 1.4202, -0.101067)
 fov = 54.2
 
 [node name="beacon_bird" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(0.0420326, 0, 0.999116, 0, 1, 0, -0.999116, 0, 0.0420326, 28.0481, -0.795736, 4.54696)
+transform = Transform3D(-0.771202, 0, 0.63659, 0, 1, 0, -0.63659, 0, -0.771202, 18.2274, -0.795736, 9.96371)
 
 [node name="model" parent="beacon_bird" instance=ExtResource("28_fhw5o")]
 transform = Transform3D(-1.75513, -0.154044, -0.946464, -0.00737563, 1.97614, -0.307953, 0.95889, -0.266758, -1.73475, -0.0729921, 0.860657, 0.637247)
@@ -739,13 +758,13 @@ transform = Transform3D(0.420104, -0.133419, 0.897615, 0, 0.989133, 0.147022, -0
 fov = 45.0
 
 [node name="beacon_nahuelito" parent="." instance=ExtResource("18_vfold")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.8709, -1.12304, 9.66977)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8575, -1.34408, 17.7301)
 
 [node name="model" parent="beacon_nahuelito" instance=ExtResource("26_u5w0m")]
-transform = Transform3D(-0.485359, 0, -0.874315, 0, 1, 0, 0.874315, 0, -0.485359, 0.62558, 0.786709, -0.312936)
+transform = Transform3D(-0.485359, 0, -0.874315, 0, 1, 0, 0.874315, 0, -0.485359, -0.589769, 0.96072, -0.104433)
 
 [node name="Camera3D" type="Camera3D" parent="beacon_nahuelito"]
-transform = Transform3D(-0.841084, 0.199278, 0.502858, 0.0357957, 0.948129, -0.315863, -0.539719, -0.247667, -0.804589, 0.793335, 0.855879, -1.47553)
+transform = Transform3D(-0.457875, -0.0504001, 0.887587, 0, 0.998392, 0.056692, -0.889017, 0.0259578, -0.457138, -0.0380344, 1.26942, -0.935608)
 fov = 60.0
 
 [node name="vision_sfx" type="AudioStreamPlayer" parent="."]
@@ -760,10 +779,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.058, 0.6, -2.24305)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.8055, 0.6, -3.72983)
 
 [node name="spawn2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.79793, 0, 13.5721)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.2847, 0, 17.4663)
 
 [node name="despawn2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.01738, 0, 16.0724)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.0485, 0, 15.6504)
 
 [node name="spawn3" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2459, 0, -0.33457)
@@ -772,16 +791,47 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2459, 0, -0.33457)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5827, 0, -2.6196)
 
 [node name="spawn4" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0799, 0, -18.7799)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.1883, 0, -6.88019)
 
 [node name="despawn4" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.0519, 0, -18.6716)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.0215, 0, -4.60894)
 
 [node name="spawn5" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7647, 0, 15.074)
 
 [node name="despawn5" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.3193, 0, 16.0283)
+
+[node name="tent" parent="." instance=ExtResource("21_wyi7n")]
+transform = Transform3D(0.99981, 0, -0.0194941, 0, 1, 0, 0.0194941, 0, 0.99981, 36.9378, 0, -6.86702)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tent"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tent/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0396271, 0, 0)
+shape = SubResource("BoxShape3D_eipt2")
+
+[node name="chair" parent="." instance=ExtResource("42_huyqb")]
+transform = Transform3D(-0.654701, -0.0323884, 0.755193, 0.00963887, 0.998643, 0.0511856, -0.755826, 0.0407905, -0.6535, 10.4628, -0.360547, 0.549836)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="chair"]
+transform = Transform3D(1, -1.86265e-09, 5.96046e-08, -3.72529e-09, 1, -1.86265e-09, 2.98023e-08, -3.72529e-09, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="chair/StaticBody3D"]
+transform = Transform3D(1, -5.40167e-08, 0, 1.86265e-09, 1, 1.86265e-09, 0, 6.14673e-08, 1, 0.196229, 0.355408, 4.76837e-07)
+shape = SubResource("BoxShape3D_huyqb")
+
+[node name="tires" parent="." instance=ExtResource("36_4u3nd")]
+transform = Transform3D(0.120085, 0, -0.992764, 0, 1, 0, 0.992764, 0, 0.120085, -24.3143, 0.155507, 19.0635)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tires"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tires/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14441e-05, 0.0855713, -0.0855236)
+shape = SubResource("BoxShape3D_wfkuu")
+
+[node name="firepit" parent="." instance=ExtResource("34_wfkuu")]
+transform = Transform3D(0.999488, 0.0319864, 0, -0.0319864, 0.999488, 0, 0, 0, 1, -44.0583, -0.351992, -2.24305)
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("33_hfr1v")
